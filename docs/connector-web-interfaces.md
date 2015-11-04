@@ -3,6 +3,8 @@ Web Interfaces
 
 * [Introduction](#introduction)
 * [mbed DS Data Model](#mbed-ds-data-model)
+* [Checking mbed DS version](#checking-mbed-ds-version)
+* [Detecting the versions of REST API](#detecting-the-versions-of-rest-api)
 * [Version of REST](#version-of-rest)
 * [Endpoint directory lookups](#endpoint-directory-lookups)
 * [Notifications](#notifications)
@@ -30,7 +32,22 @@ In short, an mbed user has endpoints that contain resources. Several mbed users 
 
 mbed DS allows endpoints and resources to be associated with semantic naming. This means that during registration, naming metadata can be associated with them. An endpoint includes a host name, which uniquely identifies it for an mbed user. An endpoint can also be associated with a node type, for example _MotionDetector_. Finally resources can be associated with a resource type (for example _LightSensor_), an interface description and other metadata about the resource, such as its content types and observability.
 
-## Detect the version of REST API
+## Checking mbed DS version
+
+mbed DS version can be checked with call
+
+        GET /
+
+**Response**
+
+|Response|Description|
+|---|---|
+|`200`|Successful response containing version of mbed DS and recent REST API version it supports.|
+
+Content-Type: text/plain
+
+## Detecting the versions of REST API
+
 The most recent version of mbed DS is the last element in the result list.
 
 	GET /rest-versions
@@ -184,8 +201,13 @@ To access the endpoint's resource representation:
 |`404`|Requested endpoint's resource is not found.|
 |`409`|Conflict. Endpoint is in queue mode and synchronous request can not be made. If noResp=true, the request is not supported.|
 |`410`|Gone. Endpoint not found.|
+|`412`|Request payload has been incomplete.|
+|`413`|Precondition failed.|
+|`415`|Media type is not supported by the endpoint.|
 |`429`|Cannot make a request at the moment, already ongoing other request for this endpoint or queue is full (for endpoints in queue mode).|
 |`502`|TCP or TLS connection to endpoint is not established.|
+|`503`|Operation cannot be executed because endpoint is currently unavailable.|
+|`504`|Operation cannot be executed due to a time-out from the endpoint.|
 
 Acceptable content types
 - application/json (for `async response id`)
@@ -234,8 +256,11 @@ The mbed DS eventing model consists of observable resources, which enables endpo
 |`202`|Accepted. Asynchronous response ID.|
 |`404`|Endpoint or its resource not found.|
 |`412`|Cannot make a subscription for a non-observable resource.|
-|`429`|Cannot make subscription request at the moment due to already ongoing other request for this endpoint or queue is full (for endpoints in queue mode).|
+|`413`|Cannot make a subscription due to failed precondition.|
+|`415`|Media type is not supported by the endpoint.|
+|`429`|Cannot make subscription request at the moment due to already ongoing other request for this endpoint or (for endpoints in queue mode) queue is full or queue was cleared because endpoint made full registration.|
 |`502`|Subscription failed.|
+|`503`|Subscription could not be established because endpoint is currently unavailable.|
 |`504`|Subscription could not be established due to a time-out from the endpoint.|
 
 **Asynchronous** 
@@ -270,7 +295,7 @@ A subscription response will arrive in the notification channel. An HTTP request
 
 |Response|Description|
 |---|---|
-|`200`|Successfully removed subscriptions.|
+|`204`|Successfully removed subscriptions.|
 
 ### Reading subscription status
 
@@ -383,13 +408,15 @@ The web application needs the following REST request (subscription):
 
 The request body contains a JSON object including URL and headers. The headers are optional. If the header is set, the notifications will include the given headers.
 
+The total length of url and values of headers should not be more than 400 chars, otherwise your request will fail with error code `bad request - 400`
+
 *Example:*
 
     PUT /notification/callback HTTP/1.1
     Content-Type: application/json
     Content-Length: 87
     
-    {"url" : "example.com", "headers" : {"Authorization" : "auth", "test-header" : "test"}}
+    {"url" : "http://example.com/notification?x=123", "headers" : {"Authorization" : "auth", "test-header" : "test"}}
     
     HTTP/1.1 204 No Content
 
