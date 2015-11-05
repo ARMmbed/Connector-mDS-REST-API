@@ -37,6 +37,7 @@ mbed DS version can be checked with call
 
         GET /
 
+
 **Response**
 
 Response|Description
@@ -51,7 +52,6 @@ The most recent version of mbed DS is the last element in the result list.
 
 	GET /rest-versions
 
-The current REST API version of mbed DS is `v1`.
 
 **Response**
 
@@ -69,6 +69,7 @@ Acceptable content-types: application/json
         ...
     ]
 
+
 *Example:*
 
     GET /rest-versions
@@ -82,6 +83,7 @@ Acceptable content-types: application/json
         "v2"
     ]
 
+
 ### Calling the latest version of the REST API
 
 To call the latest version of a resource, you can just use the existing URI without any changes or you can prefix the latest version of the above list to your URI as follows:
@@ -90,6 +92,7 @@ To call the latest version of a resource, you can just use the existing URI with
 
     /endpoints
     /v2/endpoints
+
 
 ### Calling an old version of the REST API
 
@@ -107,6 +110,7 @@ The directory lookup interface provides the possibility to browse and filter thr
 ### Listing all endpoints
 
 	GET /endpoints
+
 
 **Parameters**
 
@@ -133,6 +137,7 @@ Acceptable content-types:
         "q": "{queue mode: true|false (default: false)"}
     ]
 
+
 *Example:*
 
     GET /endpoints
@@ -146,9 +151,11 @@ Acceptable content-types:
       { "name":"node-003", "type":"QueueModeNode", "status":"ACTIVE", "q": true}
     ]
 
+
 ### Listing endpoint's resource metainformation
 
 	GET /endpoint/{endpoint-name}
+
 
 **Response**
 
@@ -174,6 +181,7 @@ Acceptable content-types:
       { "uri":"/dev/illu", "obs":"false", "type":"text/plain"}
     ]
 
+
 ### Endpoint's resource representation
 
 This interface provides access to endpoint's resource representation.
@@ -181,6 +189,7 @@ This interface provides access to endpoint's resource representation.
 To access the endpoint's resource representation:
 
 	GET, PUT, POST, DELETE /endpoints/{endpoint-name}/{resource-path}
+
 
 **Parameters**
 
@@ -239,6 +248,7 @@ Indicated with parameter `noResp=true` and as a result, mbed DS makes CoAP Non-c
     
     HTTP/1.1 204 No Content
 
+
 ## Notifications
 
 The mbed DS eventing model consists of observable resources, which enables endpoints to deliver updated resource content, periodically or with a more sophisticated solution dependent logic. Applications can subscribe to every individual resource or can set a pre-subscription data to receive a notification update.
@@ -274,6 +284,7 @@ A subscription response will arrive in the notification channel. An HTTP request
     Content-Type: application/json
     
     {"async-response-id": "5734979#node-001@test.domain.com/path1"}
+
 
 ### Removing a subscription
 
@@ -331,6 +342,7 @@ Acceptable content-types:
     /subscriptions/node-001/dev/temp
     /subscriptions/node-001/dev/power
 
+
 ### Removing endpoint's subscriptions
 
 	DELETE /subscriptions/{endpoint-name}
@@ -378,6 +390,7 @@ Changing the pre-subscription data removes all the previous subscriptions. To re
     -->
     HTTP/1.1 200 OK
 
+
 ### Getting pre-subscription data
 
 	GET /subscriptions
@@ -387,6 +400,7 @@ The server returns with the same JSON structure as described above. If there are
 ### Receiving notifications
 
 Notifications can be delivered with two different mechanisms:
+
 - Callback - using a subscription server where mbed DS actively sends the notifications. 
 - The Long polling
 
@@ -409,7 +423,7 @@ The web application needs the following REST request (subscription):
 
 The request body contains a JSON object including URL and headers. The headers are optional. If the header is set, the notifications will include the given headers.
 
-The total length of url and values of headers should not be more than 400 chars, otherwise your request will fail with error code `bad request - 400`
+The total length of url and values of headers should not be more than 400 characters, otherwise your request will fail with error code `bad request - 400`
 
 *Example:*
 
@@ -421,9 +435,11 @@ The total length of url and values of headers should not be more than 400 chars,
     
     HTTP/1.1 204 No Content
 
+
 **Checking callback URL**
 
 	GET /notification/callback
+
 
 **Response**
 
@@ -447,6 +463,7 @@ To delete the Callback URL and remove all subscriptions:
 
 	DELETE /notification/callback
 
+
 **Response**
 
 |Response|Description |
@@ -460,6 +477,7 @@ Notifications are delivered through HTTP long-poll requests. The HTTP request is
 a batch of event notifications are delivered to the client or the request times out (response code 204). In both cases, the client should open a new polling connection after the previous one closes. Long polling connections are handled on a per domain basis, so each open connection delivers notifications for a single domain. The interface for receiving event notification has a URL of the form:
 
 	GET /notification/pull
+
 
 **Parameters**
 
@@ -557,12 +575,14 @@ The notification message is delivered in JSON format as follows:
        ]
     }
 
+
 ## Traffic limits
 The number of transactions and registered endpoints per mbed user is limited. The counter for the number of transactions includes both incoming (endpoint registrations, registration updates and removals, notification) and outgoing (proxy and subscription requets). The current status can be fetched by using the REST API.
 
 To read the current status of limits:
 
 	GET /limits
+
 
 **Response**
 
