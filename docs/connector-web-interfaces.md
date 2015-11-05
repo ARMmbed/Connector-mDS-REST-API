@@ -39,9 +39,9 @@ mbed DS version can be checked with call
 
 **Response**
 
-|Response|Description|
-|---|---|
-|`200`|Successful response containing version of mbed DS and recent REST API version it supports.|
+Response|Description
+---|---
+`200`|Successful response containing version of mbed DS and recent REST API version it supports.
 
 Content-Type: text/plain
 
@@ -55,9 +55,9 @@ The current REST API version of mbed DS is `v1`.
 
 **Response**
 
-|Response|Description |
-|---|---|
-|`200`|Successful response with a list of version(s) supported by the server.|
+Response|Description
+---|---
+`200`|Successful response with a list of version(s) supported by the server.
 
 Acceptable content-types: application/json
 
@@ -110,15 +110,15 @@ The directory lookup interface provides the possibility to browse and filter thr
 
 **Parameters**
 
-|Name|Type|Description |
-|---|---|---|
-|`type`|`string`|Filter endpoints by endpoint-type.|
+Name|Type|Description
+---|---|---
+`type`|`string`|Filter endpoints by endpoint-type.
 
 **Response**
 
-|Response|Description|
-|---|---|
-|`200`|Successful response with a list of endpoints.|
+Response|Description
+---|---
+`200`|Successful response with a list of endpoints.
 
 Acceptable content-types: 
 - application/json
@@ -152,10 +152,10 @@ Acceptable content-types:
 
 **Response**
 
-|Response|Description |
-|---|---|
-|`200`|Successful response with a list of metainformation.|
-|`404`|Endpoint not found.|
+Response|Description 
+---|---
+`200`|Successful response with a list of metainformation.
+`404`|Endpoint not found.
 
 Acceptable content-types:
 - application/json
