@@ -386,7 +386,9 @@ The server returns with the same JSON structure as described above. If there are
 
 ### Receiving notifications
 
-Notifications can be delivered with the callback mechanism using a subscription server where mbed DS actively sends the notifications. 
+Notifications can be delivered with two different mechanisms:
+- Callback - using a subscription server where mbed DS actively sends the notifications. 
+- The Long polling
 
 The notifications are delivered in JSON format.
 
@@ -452,6 +454,25 @@ To delete the Callback URL and remove all subscriptions:
 |`204`|Successfully removed.|
 |`404`|Callback URL does not exist.|
 
+**Long polling for notifications**
+
+Notifications are delivered through HTTP long-poll requests. The HTTP request is kept open until an event notification or 
+a batch of event notifications are delivered to the client or the request times out (response code 204). In both cases, the client should open a new polling connection after the previous one closes. Long polling connections are handled on a per domain basis, so each open connection delivers notifications for a single domain. The interface for receiving event notification has a URL of the form:
+
+	GET /notification/pull
+
+**Parameters**
+
+|Name|Type|Description|
+|---|---|---|
+|`noWait`|`boolean`|Indicates whether this should return immediately without waiting incoming notifications. Optional. The default is `false`.|
+
+**Response**
+
+|Response|Description |
+|---|---|
+|`200`|OK.|
+|`204`|No new notifications.|
 
 ### Notification data structure
 
