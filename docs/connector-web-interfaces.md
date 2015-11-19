@@ -10,9 +10,9 @@ Web Interfaces
 * [Notifications](#notifications)
 * [Traffic limits](#traffic-limits)
 * [mbed Web Application Example](#mbed-web-application-example)
-* 
-Introduction
-------------
+
+
+## Introduction
 
 Web applications interact with mbed Device Server (mbed DS) using a set of RESTful Web interfaces over HTTP. These interfaces provide 
 administration, lookup and eventing services. 
