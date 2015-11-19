@@ -2,8 +2,8 @@ Web Interfaces
 ==============
 
 * [Introduction](#introduction)
-* [mbed DS Data Model](#mbed-ds-data-model)
-* [Checking mbed DS version](#checking-mbed-ds-version)
+* [mbed Device Connector Data Model](#mbed-device-connector-data-model)
+* [Checking mbed Device Connector version](#checking-mbed-device-connector-version)
 * [Detecting the versions of REST API](#detecting-the-versions-of-rest-api)
 * [Version of REST](#version-of-rest)
 * [Endpoint directory lookups](#endpoint-directory-lookups)
@@ -14,13 +14,13 @@ Web Interfaces
 
 ## Introduction
 
-Web applications interact with mbed Device Server (mbed DS) using a set of RESTful Web interfaces over HTTP. These interfaces provide 
-administration, lookup and eventing services. 
+Web applications interact with mbed Device Connector using a set of RESTful Web interfaces over HTTP. These interfaces provide administration, lookup and eventing services. 
 
 All REST API calls are authenticated by using the API keys (notifications, subscription, pre-subscription). 
 
-## mbed DS Data Model
-The mbed DS data model is divided into: 
+## mbed Device Connector Data Model
+
+The mbed Device Connector data model is divided into: 
 
 - mbed users. 
 - endpoints (mbed Clients).
@@ -28,13 +28,13 @@ The mbed DS data model is divided into:
 
 Resources can be perceived as individual URI paths, for example `/path`, `/longer/path`. Several resources can be  assigned for a single endpoint. Resources are typically used to provide access to sensors, actuators and configuration parameters on an IoT device. An endpoint is the software running on a device, and it belongs to a mbed user.
 
-In short, an mbed user has endpoints that contain resources. Several mbed users can be configured in mbed DS.
+In short, an mbed user has endpoints that contain resources. Several mbed users can be configured in the mbed Device Connector.
 
-mbed DS allows endpoints and resources to be associated with semantic naming. This means that during registration, naming metadata can be associated with them. An endpoint includes a host name, which uniquely identifies it for an mbed user. An endpoint can also be associated with a node type, for example _MotionDetector_. Finally resources can be associated with a resource type (for example _LightSensor_), an interface description and other metadata about the resource, such as its content types and observability.
+mbed Device Connector allows endpoints and resources to be associated with semantic naming. This means that during registration, naming metadata can be associated with them. An endpoint includes a host name, which uniquely identifies it for an mbed user. An endpoint can also be associated with a node type, for example _MotionDetector_. Finally resources can be associated with a resource type (for example _LightSensor_), an interface description and other metadata about the resource, such as its content types and observability.
 
-## Checking mbed DS version
+## Checking mbed Device Connector version
 
-mbed DS version can be checked with call
+You can check the version of mbed Device Connector with call:
 
         GET /
 
@@ -43,16 +43,15 @@ mbed DS version can be checked with call
 
 Response|Description
 ---|---
-`200`|Successful response containing version of mbed DS and recent REST API version it supports.
+`200`|Successful response containing version of mbed Device Connector and recent REST API version it supports.
 
 Content-Type: text/plain
 
 ## Detecting the versions of REST API
 
-The most recent version of mbed DS is the last element in the result list.
+The most recent version of mbed Device Connector is the last element in the result list.
 
 	GET /rest-versions
-
 
 **Response**
 
@@ -106,7 +105,7 @@ To call an old version of a resource, you must prefix the desired version of the
 
 ## Endpoint directory lookups
 
-The directory lookup interface provides the possibility to browse and filter through resource directory of mbed DS.
+The directory lookup interface provides the possibility to browse and filter through the resource directory of mbed Device Connector.
 
 ### Listing all endpoints
 
@@ -237,7 +236,7 @@ The endpoint's response arrives in the notification channel. An HTTP request wil
 
 **No response:** 
 
-Indicated with parameter `noResp=true` and as a result, mbed DS makes CoAP Non-confirmable requests. The REST response is with status code `204 No Content`. If the underlying protocol does not support it (HTTP) or the endpoint is registered in a queue mode, the response is with status code `409 Conflict`. 
+Indicated with parameter `noResp=true` and as a result, mbed Device Connector makes CoAP Non-confirmable requests. The REST response is with status code `204 No Content`. If the underlying protocol does not support it (HTTP) or the endpoint is registered in a queue mode, the response is with status code `409 Conflict`. 
 
 <span style="background-color:lightyellow; color:black; display:block; height:100%; padding:10px">
 **Note**: This type of requests are not guaranteed.
@@ -252,7 +251,7 @@ Indicated with parameter `noResp=true` and as a result, mbed DS makes CoAP Non-c
 
 ## Notifications
 
-The mbed DS eventing model consists of observable resources, which enables endpoints to deliver updated resource content, periodically or with a more sophisticated solution dependent logic. Applications can subscribe to every individual resource or can set a pre-subscription data to receive a notification update.
+The eventing model of mbed Device Connector consists of observable resources, which enables endpoints to deliver updated resource content, periodically or with a more sophisticated solution dependent logic. Applications can subscribe to every individual resource or can set a pre-subscription data to receive a notification update.
 
 ### Subscribing to a resource
 
@@ -357,7 +356,7 @@ Acceptable content-types:
 
 ### Setting pre-subscription data
 
-Pre-subscription is a set of rules and patterns put by the application. When an endpoint registers and its name, type and registered resources match the pre-subscription data, mbed DS sends subscription requests to the device automatically. 
+Pre-subscription is a set of rules and patterns put by the application. When an endpoint registers and its name, type and registered resources match the pre-subscription data, mbed Device Connector sends subscription requests to the device automatically. 
 
 The pattern may include the endpoint name (optionally having an `*` character at the end), endpoint type, a list of resources or expressions with an `*` character at the end. The pre-subscription concerns all the endpoints that are already registered and the server sends subscription requests to the devices immediately when the patterns are set. The speed of the requests can be limited by the configuration parameters preventing the underlying network to be flooded or overloaded.
 
@@ -402,8 +401,8 @@ The server returns with the same JSON structure as described above. If there are
 
 Notifications can be delivered with two different mechanisms:
 
-- Callback - using a subscription server where mbed DS actively sends the notifications. 
-- The Long polling
+- Callback - using a subscription server where mbed Device Connector actively sends the notifications. 
+- The Long polling.
 
 The notifications are delivered in JSON format.
 
@@ -578,6 +577,7 @@ The notification message is delivered in JSON format as follows:
 
 
 ## Traffic limits
+
 The number of transactions and registered endpoints per mbed user is limited. The counter for the number of transactions includes both incoming (endpoint registrations, registration updates and removals, notification) and outgoing (proxy and subscription requets). The current status can be fetched by using the REST API.
 
 To read the current status of limits:
