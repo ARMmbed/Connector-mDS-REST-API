@@ -9,7 +9,8 @@ Web Interfaces
 * [Endpoint directory lookups](#endpoint-directory-lookups)
 * [Notifications](#notifications)
 * [Traffic limits](#traffic-limits)
-
+* [mbed Web Application Example](#mbed-web-application-example)
+* 
 Introduction
 ------------
 
@@ -603,3 +604,7 @@ To read the current status of limits:
 	  endpoint-quota: 100, 
 	  endpoint-count: 50 
 	}
+
+## mbed Web Application Example
+
+You can find [a Web Application example](https://github.com/ARMmbed/mbed-webapp-example/tree/master) working with the mbed Device Connector in the ARMmbed github.
