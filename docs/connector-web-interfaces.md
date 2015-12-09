@@ -234,6 +234,16 @@ The endpoint's response arrives in the notification channel. An HTTP request wil
     
     {"async-response-id": "23471#node-001@test.domain.com/dev/temp"}
 
+When you request for resources of one endpoint, the request is asynchronous and it will be delivered in two steps:
+
+1. You make the request and get an `async-response-id` that will be used to map the response afterwards.
+
+2. A notification with the `async-response-id` and the real value of the requested resource arrive in the notification channel (that you should have created beforehand). You need to map that notification to the request that you made in step 1 using that `async-response-id`.
+
+The value of the resource comes b-64 encoded. You just need to decode it.
+
+If you make a new request to the same resource it comes from the cache (it is cached 60 secs). In that case, you will not receive the `async-response-id`. The real value will be returned already decoded.
+
 **No response:** 
 
 Indicated with parameter `noResp=true` and as a result, mbed Device Connector makes CoAP Non-confirmable requests. The REST response is with status code `204 No Content`. If the underlying protocol does not support it (HTTP) or the endpoint is registered in a queue mode, the response is with status code `409 Conflict`. 
