@@ -508,12 +508,12 @@ A notification message contains the following server event types:
 
 |Notification type|Description|
 |---|---|
-|notifications|Contains resource notifications.|
+|notifications|Contains resource notifications. **Note that the payload is base64 encoded.**|
 |registrations|List of endpoints that have registered (with resources).|
 |reg-updates|List of endpoints that have updated registration.|
 |de-registrations|List of endpoints that are removed in controlled manner.|
 |registrations-expired|List of endpoints that are removed because the registration has expired.|
-|async-responses|Responses to asynchronous proxy request.|
+|async-responses|Responses to asynchronous proxy request. **Note that the payload is base64 encoded.**|
 
 The notification message is delivered in JSON format as follows:
 
