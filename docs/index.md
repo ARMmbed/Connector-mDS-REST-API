@@ -1,4 +1,92 @@
-ARM mbed Device Connector
-=========================
+# mbed Device Connector Web API
 
-The ARM mbed Device Connector is a hosted version of the mbed Device Server designed for fast development and prototyping. It gives you a quick, secure way of connecting your devices to the cloud without the overhead of building the infrastructure to host mbed Device Server. The service makes IoT device messaging, provisioning and updates available to enterprise software, web applications and cloud stacks through easily-integrated REST APIs.
+The mbed Device Connector Web API is an HTTP REST API that lets you control your devices through mbed Device Connector. The API allows web apps to get and set data, trigger events, and subscribe to changes on the device, without needing to know about the protocol your device uses to connect.
+
+This document is an introduction to the mbed Device Connector Web API. If you are familiar with the API you can jump straight to the [API Reference](api-reference.md).
+
+
+![The flow between mbed Client and your application through mbed Device Connector](assets/connector-flow.png)
+
+Be aware that mbed Device Connector acts as an interface between your web application and the device. When the device is powered off, you cannot query the last known state. mbed Device Connector does not provide long term caching or historic data.
+
+## Authentication
+
+To connect your web app to the mbed Device Connector API you need an [access key](https://connector.mbed.com/#accesskeys). Every request sent to Connector uses your API key as part of the `Authorization` HTTP header, to validate the request to your mbed account and the devices that account controls.
+
+```
+Authorization: Bearer YOUR_ACCESS_KEY
+```
+
+If the Authorization header is not set, or if the access key is incorrect, requests return a `401 Unauthorized` status code.
+
+## Asynchronous requests
+
+A number of functions in the mbed Device Connector API are asynchronous, because it's not guaranteed that an action (such as writing to a device) will happen straight away, as the device might be in deep sleep. These functions are marked with '(async)' in the API reference.
+
+Requests to these APIs return a JSON object in the following format:
+
+```js
+{"async-response-id":"1073741825#521f9d17-c5d7-4769-b89f-b608..."}
+```
+
+When the response is available, mbed Device Connector notifies you by sending a `PUT` request to a URL of your choice. This means that you will need a public-facing web server that can receive the responses. If the URL of your web server is ``https://www.my-mbed-consumer.com/notify``, you need to tell the API to send a notification to that URL:
+
+    PUT /notification/callback
+    Content-Type: application/json
+
+    { "url": "https://www.my-mbed-consumer.com/notify" }
+
+    HTTP/1.1 204 No Content
+
+
+> You can also specify which headers to be sent with the `PUT` requests, for example to verify that a request actually came from mbed Device Connector. For more information see ['Registering a notification callback' in the API Reference](api-reference.md#registering-a-notification-callback).
+
+mbed Device Connector will make a PUT request to this URL immediately. If the URL you passed in is not reachable, a `400 Bad Request` is returned, with information on why the request failed in the response body.
+
+If you did not register a URL where mbed Device Connector can notify you, calls to asynchronous APIs respond with `412 Precondition Failed`, and the body says `No notification channel`.
+
+<span style="background-color:#E6E6E6;  border:1px solid #000;display:block; height:100%; padding:10px">**Note:** If your server cannot be reached for 5 minutes, the notification channel is removed. Therefore, always re-register on application startup.</span>
+
+### Long Polling
+
+If it’s not possible to have a public facing URL, for example when developing on your local machine, you can also use [long polling](api-reference.md#long-polling) to check for new messages. However, we recommend you use callback URLs whenever possible.
+
+
+## The mbed Device Connector Data Model
+
+The mbed Device Connector data model consists of three levels. At the top there is your mbed account. Then there are endpoints, which are physical devices running [mbed Client](https://www.mbed.com/en/development/software/mbed-client/) and registered to an account. Each endpoint can have multiple resources it exposes. These resources may be readable and writable (like LEDs), or read only (like a serial number string). The endpoint controls which resources are exposed.
+
+Resources are categorized using the [Lightweight Machine to Machine (LWM2M) protocol](http://technical.openmobilealliance.org/Technical/technical-information/omna/lightweight-m2m-lwm2m-object-registry) from the Open Mobile Alliance (OMA), which has three levels of structure:
+
+*ObjectID/ObjectInstance/ResourceId*
+
+* ObjectID: used to uniquely identify the thing being exposed, which is typically a grouping of other things under it. DeviceInformation (3), Temperature (3303), Humidity (3304) and Geolocation are all Object IDs.
+* ObjectInstance: denotes which instance of the ObjectID you are talking about. There can be multiple temperature sensors on an endpoint, so the first would be /3303/0, and the second would be /3303/1, and so on.
+* ResourceID: used to identify a unique resource on an object. The Resource ID is also where the values are held. Things like Max Measured Value (5602), Min Measured Value (5601), and Sensor Value (5700) are all examples of resource IDs.
+
+
+![mbed Device Connector data model](assets/data-model.png)
+
+Using the LWM2M specification it’s easy for services and machines to discover resources and have a standard way of controlling them. The specification is essentially a giant look-up table. The [full OMA LWM2M specification can be found here](http://technical.openmobilealliance.org/Technical/technical-information/omna/lightweight-m2m-lwm2m-object-registry).
+
+### Example
+
+If you want to read the sensor value (resource ID 5700) from a temperature object (3303) on endpoint1 you need to ``GET /endpoints/endpoint1/3303/0/5700``.
+
+Likewise, to discover what endpoints are on a domain you can ``GET /endpoints``, and to discover what resources are on endpoint1 you can ``GET /endpoints/endpoint1``.
+
+### Defining resources in mbed Client
+
+Resources are defined by the endpoint, which runs mbed Client. As a reference:
+
+* The endpoint name is set in [M2MInterfaceFactory::create_interface](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/classM2MInterfaceFactory.html#a59d3697e394c02ecebb4c51f7c07de51).
+* Resources are created via:
+    * [M2MInterfaceFactory::create_object](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/classM2MInterfaceFactory.html#a173c443bb6cc427c52203ed8183c5361) (ObjectId)
+    * [M2MObjectInstance::create_dynamic_resource](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/classM2MObjectInstance.html#a9b3f88dc2d28512ea6c3db6f74168c3f) and [M2MObjectInstance::create_static_resource](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/classM2MObjectInstance.html#aaa596f731688730d7a883b7f1251a662) (ResourceId)
+
+You can find full documentation in the [mbed Client documentation](https://docs.mbed.com/docs/mbed-client-guide/en/latest/Introduction/).
+
+## Example applications
+
+We have example web applications available for [Java](https://github.com/ARMmbed/mbed-webapp-example/), Node.js and Python.
+
