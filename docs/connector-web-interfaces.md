@@ -484,7 +484,7 @@ To delete the Callback URL and remove all subscriptions:
 **Long polling for notifications**
 
 Notifications are delivered through HTTP long-poll requests. The HTTP request is kept open until an event notification or 
-a batch of event notifications are delivered to the client or the request times out (response code 204). In both cases, the client should open a new polling connection after the previous one closes. Long polling connections are handled on a per domain basis, so each open connection delivers notifications for a single domain. The interface for receiving event notification has a URL of the form:
+a batch of event notifications are delivered to the client or the request times out (response code 204). In both cases, the client should open a new polling connection after the previous one closes. It is mandatory to have persistent connection (`Connection: keep-alive` header in the request) to avoid excess TLS handshakes. The interface for receiving event notification has a URL of the form:
 
 	GET /notification/pull
 
