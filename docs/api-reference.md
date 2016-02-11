@@ -99,7 +99,7 @@ Acceptable content-types:
 [{
   "name": "{endpoint name, set by the client in M2MInterfaceFactory::create_interface}",
   "type": "{endpoint type, set by the client in M2MInterfaceFactory::create_interface}",
-  "status": "{endpoint status: ACTIVE|STALE}",
+  "status": "{endpoint status: always ACTIVE, but reserved for future use}",
   "q": "{queue mode: true|false (default: false)}"
 }]
 ```
@@ -117,11 +117,17 @@ Acceptable content-types:
       { "name":"node-003", "type":"QueueModeNode", "status":"ACTIVE", "q": true}
     ]
 
-*@todo: What does queue mode mean?*
+#### Queue mode
+
+When an endpoint is in queue mode, messages sent to the endpoint will not wake up the physical device. Rather, the messages are queued and delivered when the device wakes up and connects to mbed Device Connector itself. Queue mode can also be used when the device is behind a NAT and cannot be reached directly by mbed Device Connector.
 
 ### Listing an endpoint's resources
 
 	GET /endpoint/{endpoint-name}
+
+The list of resources are cached by mbed Device Connector, and this call does not wake up the device.
+
+**Note:** `endpoint-name` needs to be an exact match of the name of the endpoint. It is not possible to use wildcards here.
 
 **Response**
 
@@ -566,7 +572,7 @@ The notification message is delivered in JSON format:
 
 #### Registering a callback URL
 
-Register a URL to which the server should deliver notifications. 
+Register a URL to which the server should deliver notifications.
 
     PUT /notification/callback
 
@@ -839,7 +845,7 @@ The server returns with the same JSON structure as described above. If there are
 
 ## Traffic limits
 
-The number of transactions and registered endpoints for each mbed user is limited per 24 hours. The counter for the number of transactions includes both incoming (endpoint registrations, registration updates and removals, notifications) and outgoing (proxy and subscription requests). 
+The number of transactions and registered endpoints for each mbed user is limited per 24 hours. The counter for the number of transactions includes both incoming (endpoint registrations, registration updates and removals, notifications) and outgoing (proxy and subscription requests).
 
 To read the current value of the limit counter:
 
