@@ -2,5 +2,5 @@ site_name: Web interfaces for the ARM mbed Device Connector
 theme: readthedocs
 use directory_urls: false
 pages:
-- ['index.md','ARM mbed Device Connector','Introduction to the ARM mbed Device Connector']
-- ['connector-web-interfaces.md','mbed Device Connector Web Interfaces','Overview to the Web Interfaces']
+- ['index.md','ARM mbed Device Connector','Introduction to the ARM mbed Device Connector API']
+- ['api-reference.md','mbed Device Connector API Reference','mbed Device Connector API Reference']
