@@ -806,7 +806,8 @@ If you send an empty array, the pre-subscription data will be removed.
 
 |Response|Description|
 |---|---|
-|200|Successfully set pre-subscription data.|
+|204|Successfully set pre-subscription data.|
+|400|Malformed content.|
 
 **Example**
 
