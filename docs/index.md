@@ -65,7 +65,7 @@ Resources are categorized using the [Lightweight Machine to Machine (LWM2M) prot
 * ResourceID: used to identify a unique resource on an object. The Resource ID is also where the values are held. Things like Max Measured Value (5602), Min Measured Value (5601), and Sensor Value (5700) are all examples of resource IDs.
 
 
-![mbed Device Connector data model](assets/data-model.png)
+![mbed Device Connector data model](assets/data_model.png)
 
 Using the LWM2M specification it’s easy for services and machines to discover resources and have a standard way of controlling them. The specification is essentially a giant look-up table. The [full OMA LWM2M specification can be found here](http://technical.openmobilealliance.org/Technical/technical-information/omna/lightweight-m2m-lwm2m-object-registry).
 
