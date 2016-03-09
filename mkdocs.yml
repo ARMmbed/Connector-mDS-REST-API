@@ -4,3 +4,4 @@ use directory_urls: false
 pages:
 - ['index.md','ARM mbed Device Connector','Introduction to the ARM mbed Device Connector API']
 - ['api-reference.md','mbed Device Connector API Reference','mbed Device Connector API Reference']
+- ['webhooks.md','mbed Device Connector webhooks']
