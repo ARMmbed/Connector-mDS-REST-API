@@ -192,6 +192,7 @@ If calls with this parameter enabled succeed, they return with the status code `
 
 |Response|Description|
 |---|---|
+|200|Successful GET operation.|
 |202|Accepted. Returns an asynchronous response ID.|
 |205|No cache available for resource.|
 |404|Requested endpoint's resource is not found.|
