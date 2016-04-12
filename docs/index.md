@@ -31,27 +31,24 @@ or otherwise slow to respond. These functions are marked with '(async)' in the A
 * [Deleting a resource](api-reference.md#deleting-a-resource)
 * [Subscribing to an individual resource](api-reference.md#subscribing-to-an-individual-resource)
 
-Requests to these APIs return a JSON object containing *async-response-id* in the following format:
+Requests to these APIs return a JSON object containing `async-response-id` in the following format:
 
 ```js
 {"async-response-id":"1073741825#521f9d17-c5d7-4769-b89f-b608..."}
 ```
 
-The actual response related to the *async-response-id* can be received by either [registering a notification callback](#registering-a-notification-callback)
-or doing [long polling](#long polling). These mechanisms are explained in the following two chapters. The notification callback and
-long polling are also used for receiving [notifications](api-reference.md#notifications) about certain events,
-such as when a device registers or sends a notification about a change in it's resource state.
-In these cases the *async-response-id* is not involved.
+The actual response related to the `async-response-id` can be received by either [registering a notification  callback](#registering-a-notification-callback) or [long polling](#long polling). These mechanisms are explained in the following two chapters. The notification callback and long polling are also used for receiving [notifications](api-reference.md#notifications) about certain events, such as device registration or a change in its resource state.
+In these cases, the `async-response-id` is not involved.
 
 
-### Registering a Notification Callback
+### Registering a notification callback
 
-The notification callback, also called a webhook, is the primary mechanism for receiving a response for
+A notification callback, also called a *webhook*, is the primary mechanism for receiving a response for
 an asynchronous request or for receiving event notifications.
 
 When the response or event notification is available, mbed Device Connector notifies you by sending
 a `PUT` request to a URL of your choice. This means that you will need a public-facing web server that can
-receive the responses. If the URL of your web server is ``https://www.my-mbed-consumer.com/notify``,
+receive the responses. If the URL of your web server is for example ``https://www.my-mbed-consumer.com/notify``,
 you need to tell the API to send a notification to that URL:
 
     PUT /notification/callback
@@ -62,27 +59,27 @@ you need to tell the API to send a notification to that URL:
     HTTP/1.1 204 No Content
 
 
-> You can also specify which headers to be sent with the `PUT` requests, for example to verify that a request actually came from mbed Device Connector. For more information see ['Registering a notification callback' in the API Reference](api-reference.md#registering-a-notification-callback).
+You can also specify which headers are sent with the `PUT` requests, for example to verify that a request actually came from mbed Device Connector. For more information, see [Registering a notification callback](api-reference.md#registering-a-notification-callback).
 
 mbed Device Connector will make a PUT request to this URL immediately. If the URL you passed in is not reachable,
-a `400 Bad Request` is returned, with information on why the request failed in the response body.
+a `400 Bad Request` response is returned, with information on why the request failed in the response body.
 
 If you did not register a URL where mbed Device Connector can notify you, calls to asynchronous APIs respond
 with `412 Precondition Failed`, and the body says `No notification channel`.
 
 <span style="background-color:#E6E6E6;  border:1px solid #000;display:block; height:100%; padding:10px">
 **Note:** The callback registration stays valid forever except when your server cannot be reached for 7 days.
-In this case the callback registration is removed. Therefore, always re-register on application startup.
+In this case, the callback registration is removed. Therefore, always re-register on application startup.
 </span>
 
-### Long Polling
+### Long polling
 
 If it’s not possible to have a public facing callback URL, for example when developing on your
 local machine, you can use [long polling](api-reference.md#long-polling) to check for new messages.
 However, to reduce network traffic and to increase performance we recommend that you use callback URLs (webhooks) whenever possible.
 
 
-## The mbed Device Connector Data Model
+## The mbed Device Connector data model
 
 The mbed Device Connector data model consists of three levels. At the top there is your mbed account. Then there are endpoints, which are physical devices running [mbed Client](https://www.mbed.com/en/development/software/mbed-client/) and registered to an account. Each endpoint can have multiple resources it exposes. These resources may be readable and writable (like LEDs), or read only (like a serial number string). The endpoint controls which resources are exposed.
 
