@@ -26,10 +26,10 @@ that an action (such as writing to a device) will happen straight away, as the d
 or otherwise slow to respond. These functions are marked with '(async)' in the API reference:
 
 * [Reading from a resource](api-reference.md#reading-from-a-resource-async)
-* [Executing a function on a resource](api-reference.md#executing-a-function-on-a-resource)
-* [Writing to a resource](api-reference.md#writing-to-a-resource)
-* [Deleting a resource](api-reference.md#deleting-a-resource)
-* [Subscribing to an individual resource](api-reference.md#subscribing-to-an-individual-resource)
+* [Executing a function on a resource](api-reference.md#executing-a-function-on-a-resource-async)
+* [Writing to a resource](api-reference.md#writing-to-a-resource-async)
+* [Deleting a resource](api-reference.md#deleting-a-resource-async)
+* [Subscribing to an individual resource](api-reference.md#subscribing-to-an-individual-resource-async)
 
 Requests to these APIs return a JSON object containing `async-response-id` in the following format:
 
@@ -59,7 +59,7 @@ you need to tell the API to send a notification to that URL:
     HTTP/1.1 204 No Content
 
 
-You can also specify which headers are sent with the `PUT` requests, for example to verify that a request actually came from mbed Device Connector. For more information, see [Registering a notification callback](api-reference.md#registering-a-notification-callback).
+You can also specify which headers are sent with the `PUT` requests, for example to verify that a request actually came from mbed Device Connector. For more information, see [Registering a notification  callback](api-reference.md#registering-a-notification-callback).
 
 mbed Device Connector will make a PUT request to this URL immediately. If the URL you passed in is not reachable,
 a `400 Bad Request` response is returned, with information on why the request failed in the response body.
@@ -74,9 +74,7 @@ In this case, the callback registration is removed. Therefore, always re-registe
 
 ### Long polling
 
-If it’s not possible to have a public facing callback URL, for example when developing on your
-local machine, you can use [long polling](api-reference.md#long-polling) to check for new messages.
-However, to reduce network traffic and to increase performance we recommend that you use callback URLs (webhooks) whenever possible.
+If it’s not possible to have a public facing callback URL, for example when developing on your local machine, you can use [long polling](api-reference.md#long-polling) to check for new messages. However, to reduce network traffic and to increase performance we recommend that you use callback URLs (webhooks) whenever possible.
 
 
 ## The mbed Device Connector data model
