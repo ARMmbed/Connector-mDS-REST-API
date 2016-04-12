@@ -25,7 +25,7 @@ Many functions in the mbed Device Connector API are asynchronous because it is n
 that an action (such as writing to a device) will happen straight away, as the device might be in deep sleep
 or otherwise slow to respond. These functions are marked with '(async)' in the API reference:
 
-* [Reading from a resource](api-reference.md#reading-from-a-resource-(async))
+* [Reading from a resource](api-reference.md#reading-from-a-resource-async)
 * [Executing a function on a resource](api-reference.md#executing-a-function-on-a-resource)
 * [Writing to a resource](api-reference.md#writing-to-a-resource)
 * [Deleting a resource](api-reference.md#deleting-a-resource)
