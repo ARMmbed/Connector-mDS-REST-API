@@ -123,7 +123,7 @@ When an endpoint is in queue mode, messages sent to the endpoint will not wake u
 
 ### Listing an endpoint's resources
 
-	GET /endpoint/{endpoint-name}
+	GET /endpoints/{endpoint-name}
 
 The list of resources are cached by mbed Device Connector, and this call does not wake up the device.
 
@@ -179,7 +179,7 @@ If calls with this parameter enabled succeed, they return with the status code `
 
 ### Reading from a resource ([async](index.md#asynchronous-requests))
 
-    GET /endpoint/{endpoint-name}/{resource-path}
+    GET /endpoints/{endpoint-name}/{resource-path}
 
 **Query string parameters**
 
@@ -250,7 +250,7 @@ When the response is available, on your notification channel:
 
 This API can be used to write new values to existing resources, or to create new resources on the device. The `resource-path` does not have to exist - it can be created by the call.
 
-    PUT /endpoint/{endpoint-name}/{resource-path}
+    PUT /endpoints/{endpoint-name}/{resource-path}
 
 **Query string parameters**
 
@@ -323,7 +323,7 @@ The [mbed Client overview](https://docs.mbed.com/docs/mbed-client-guide/en/lates
 
 ### Executing a function on a resource ([async](index.md#asynchronous-requests))
 
-    POST /endpoint/{endpoint-name}/{resource-path}
+    POST /endpoints/{endpoint-name}/{resource-path}
 
 **Query string parameters**
 
@@ -402,7 +402,7 @@ The [mbed Client overview](https://docs.mbed.com/docs/mbed-client-guide/en/lates
 A request to delete a resource must be handled by both mbed Client and mbed Device Connector. The resource is not deleted from mbed Device Connector until the delete is handled by mbed Client.
 
 
-    DELETE /endpoint/{endpoint-name}/{resource-path}
+    DELETE /endpoints/{endpoint-name}/{resource-path}
 
 |Name|Type|Description|
 |---|---|---|
