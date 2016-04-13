@@ -73,7 +73,7 @@ Endpoints are physical devices running [mbed Client](https://www.mbed.com/en/dev
 
 ### Listing all endpoints
 
-	GET /endpoints
+	GET /v2/endpoints
 
 
 **Query string parameters**
@@ -106,7 +106,7 @@ Acceptable content-types:
 
 **Example**
 
-    GET /endpoints
+    GET /v2/endpoints
     Accept: application/json
 
     HTTP/1.1 200 OK
@@ -123,7 +123,7 @@ When an endpoint is in queue mode, messages sent to the endpoint will not wake u
 
 ### Listing an endpoint's resources
 
-	GET /endpoints/{endpoint-name}
+	GET /v2/endpoints/{endpoint-name}
 
 The list of resources are cached by mbed Device Connector, and this call does not wake up the device.
 
@@ -154,7 +154,7 @@ Acceptable content-types:
 
 **Example**
 
-    GET /endpoints/node-001
+    GET /v2/endpoints/node-001
     Accept: application/json
 
     HTTP/1.1 200 OK
@@ -179,7 +179,7 @@ If calls with this parameter enabled succeed, they return with the status code `
 
 ### Reading from a resource ([async](index.md#asynchronous-requests))
 
-    GET /endpoints/{endpoint-name}/{resource-path}
+    GET /v2/endpoints/{endpoint-name}/{resource-path}
 
 **Query string parameters**
 
@@ -224,7 +224,7 @@ Acceptable content types:
 
 **Example**
 
-    GET /endpoints/node-001/actuator/0/speed
+    GET /v2/endpoints/node-001/actuator/0/speed
     Accept: application/json
 
     HTTP/1.1 200 OK
@@ -250,7 +250,7 @@ When the response is available, on your notification channel:
 
 This API can be used to write new values to existing resources, or to create new resources on the device. The `resource-path` does not have to exist - it can be created by the call.
 
-    PUT /endpoints/{endpoint-name}/{resource-path}
+    PUT /v2/endpoints/{endpoint-name}/{resource-path}
 
 **Query string parameters**
 
@@ -292,7 +292,7 @@ Acceptable content types:
 
 **Example**
 
-    PUT /endpoints/node-001/actuator/0/speed
+    PUT /v2/endpoints/node-001/actuator/0/speed
     Accept: application/json
     Content-Type: text/plain
 
@@ -323,7 +323,7 @@ The [mbed Client overview](https://docs.mbed.com/docs/mbed-client-guide/en/lates
 
 ### Executing a function on a resource ([async](index.md#asynchronous-requests))
 
-    POST /endpoints/{endpoint-name}/{resource-path}
+    POST /v2/endpoints/{endpoint-name}/{resource-path}
 
 **Query string parameters**
 
@@ -368,7 +368,7 @@ Acceptable content types:
 
 **Example**
 
-    POST /endpoints/node-001/actuator/0/drive
+    POST /v2/endpoints/node-001/actuator/0/drive
     Accept: application/json
     Content-Type: text/plain
 
@@ -402,7 +402,7 @@ The [mbed Client overview](https://docs.mbed.com/docs/mbed-client-guide/en/lates
 A request to delete a resource must be handled by both mbed Client and mbed Device Connector. The resource is not deleted from mbed Device Connector until the delete is handled by mbed Client.
 
 
-    DELETE /endpoints/{endpoint-name}/{resource-path}
+    DELETE /v2/endpoints/{endpoint-name}/{resource-path}
 
 |Name|Type|Description|
 |---|---|---|
@@ -444,7 +444,7 @@ Acceptable content types:
 
 **Example**
 
-    DELETE /endpoints/node-001/logs/0/debug
+    DELETE /v2/endpoints/node-001/logs/0/debug
     Accept: application/json
     Content-Type: text/plain
 
@@ -575,7 +575,7 @@ The notification message is delivered in JSON format:
 
 Register a URL to which the server should deliver notifications.
 
-    PUT /notification/callback
+    PUT /v2/notification/callback
 
 **Note:** Only one URL can be active. If you register a new URL when another is already active, the old URL is replaced by the new.
 
@@ -609,7 +609,7 @@ The server responds with `400 Bad Request` if:
 
 **Example:**
 
-    PUT /notification/callback HTTP/1.1
+    PUT /v2/notification/callback HTTP/1.1
     Content-Type: application/json
     Content-Length: 87
 
@@ -621,7 +621,7 @@ The server responds with `400 Bad Request` if:
 
 Returns the notification callback URL and the headers that have been set in [Registering a notification callback](#registering-a-notification-callback).
 
-    GET /notification/callback
+    GET /v2/notification/callback
 
 **Response**
 
@@ -632,7 +632,7 @@ Returns the notification callback URL and the headers that have been set in [Reg
 
 **Example**
 
-    GET /notification/callback HTTP/1.1
+    GET /v2/notification/callback HTTP/1.1
     Content-Type: application/json
     Content-Length: 87
 
@@ -655,7 +655,7 @@ To delete the Callback URL and remove all subscriptions:
 
 As an alternative to the notification callback, you can use HTTP long-poll requests to receive notifications. You open a request from the client to mbed Device Connector, and the request will be kept open until either an event notification is delivered to the client or the request times out (after 30 seconds). In both cases, the client should open a new polling request after the previous one closes.
 
-	GET /notification/pull
+	GET /v2/notification/pull
 
 **Note:** It is mandatory to create a persistent connection, by sending the `Connection: keep-alive` header, to avoid excessive TLS handshakes.
 
@@ -674,7 +674,7 @@ After you set up [notifications](#notifications), you can subscribe to either in
 
 This function subscribes to an individual resource.
 
-	PUT /subscriptions/{endpoint-name}/{resource-path}
+	PUT /v2/subscriptions/{endpoint-name}/{resource-path}
 
 **Response**
 
@@ -693,7 +693,7 @@ This function subscribes to an individual resource.
 
 **Example:**
 
-    PUT /subscriptions/node-001/piezo/0/heart-rate
+    PUT /v2/subscriptions/node-001/piezo/0/heart-rate
 
     HTTP/1.1 202 Accepted
     Content-Type: application/json
@@ -727,7 +727,7 @@ When the response is available, on your notification channel:
 
 ### Removing all subscriptions
 
-	DELETE /subscriptions
+	DELETE /v2/subscriptions
 
 **Response**
 
@@ -737,7 +737,7 @@ When the response is available, on your notification channel:
 
 ### Checking resource subscription status
 
-	GET /subscriptions/{endpoint-name}/{resource-path}
+	GET /v2/subscriptions/{endpoint-name}/{resource-path}
 
 **Response**
 
@@ -748,7 +748,7 @@ When the response is available, on your notification channel:
 
 ### Reading endpoint's subscriptions
 
-	GET /subscriptions/{endpoint-name}
+	GET /v2/subscriptions/{endpoint-name}
 
 **Response**
 
@@ -763,7 +763,7 @@ Acceptable content-types:
 
 **Example:**
 
-    GET /subscriptions/node-001
+    GET /v2/subscriptions/node-001
 
     HTTP/1.1 200 OK
     Content-Type: text/uri-list
@@ -774,7 +774,7 @@ Acceptable content-types:
 
 ### Removing endpoint's subscriptions
 
-	DELETE /subscriptions/{endpoint-name}
+	DELETE /v2/subscriptions/{endpoint-name}
 
 **Response**
 
@@ -787,7 +787,7 @@ Acceptable content-types:
 
 Besides manually subscribing to resources, you can also automatically subscribe to resources based on their endpoint name, endpoint type, or listed resources (a pre-subscription). mbed Device Connector will automatically send a subscription request when it encounters an endpoint or resource that matches these definitions.
 
-    PUT /subscriptions
+    PUT /v2/subscriptions
 
 **Body**
 
@@ -812,7 +812,7 @@ If you send an empty array, the pre-subscription data will be removed.
 
 **Example**
 
-    PUT /subscriptions
+    PUT /v2/subscriptions
     Content-Type: application/json
 
     [
@@ -841,7 +841,7 @@ If you send an empty array, the pre-subscription data will be removed.
 
 ### Getting automatic subscriptions
 
-	GET /subscriptions
+	GET /v2/subscriptions
 
 The server returns with the same JSON structure as described above. If there are no pre-subscribed resources, it returns with an empty array.
 
@@ -851,7 +851,7 @@ The number of transactions and registered endpoints for each mbed user is limite
 
 To read the current value of the limit counter:
 
-	GET /limits
+	GET /v2/limits
 
 **Response**
 
@@ -861,7 +861,7 @@ To read the current value of the limit counter:
 
 **Example**
 
-    GET /limits
+    GET /v2/limits
 
     HTTP/1.1 200 OK
     Content-Type: application/json
