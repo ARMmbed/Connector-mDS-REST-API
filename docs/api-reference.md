@@ -11,6 +11,11 @@ The mbed Device Connector Web API offers functions that manage:
 * [Subscriptions](#subscriptions)
 * [Traffic limits](#traffic-limits)
 
+The [Device Connector developer tools](#developer-tools) can be used to:
+
+* [Create a new device certificate](#create-a-certificate)
+* [Create a new access key](#create-an-access-key)
+
 __A note about asynchronous functions__
 
 A number of functions in the mbed Device Connector API are asynchronous, because it's not guaranteed that an action (such as writing to a device) will happen straight away, as the device might be in deep sleep. These APIs are marked with '(async)' in the API reference. For information about handling asynchronous functions, see: [Asynchronous requests](index.md#asynchronous-requests).
@@ -872,5 +877,156 @@ To read the current value of the limit counter:
         "endpoint-quota": 100,
         "endpoint-count": 50
     }
+    
+## Developer tools
 
+The REST methods described below help automation of applications. Access key authorization is required.
+
+**Note:** A different base URL is required to use these tools. The services can be accessed only from URL https://connector.mbed.com.
+
+### Create a certificate
+
+#### Creating a new certificate for an endpoint
+
+Besides requesting for the `security.h` file from the mbed Connector webapp, the security credentials can be generated programmatically using CSR process. For such request, you need to have the Elliptic Curve private-public keys created. Secp256r1 is recommended, but other 256 bit curves work as well. The public key is sent along with your domain ID in the JSON body as a PEM format string. When you have received the domain and endpoint names and the server and device certificates along with the successful response, you must formulate the `security.h` file manually. The file needs to include the private key that pairs with the public key sent in CSR request.
+
+To create the endpoint credentials:
+
+	POST /api/cert
+
+**Body**
+
+The body needs to be a JSON object that contains the following fields:
+
+|Name|Type|Description|
+|---|---|---|
+|domain|`string`| The ID of your domain.|
+|publickey|`string`| The public key of your Elliptic Curve key pair, in PEM format.|
+
+Both fields are mandatory.
+
+**Response**
+
+Response|Description
+---|---
+201|Created, successful response with credential details.
+401|Unauthorized, provided access key is not valid for domain.
+400|Bad Request, error parsing JSON payload or error reading the public key.
+
+Acceptable content-types:
+
+- application/json
+
+**Example**
+
+    POST /api/cert
+    Accept: application/json
+    Content-Type: application/json
+
+    {
+        "domain": "012345-6789-0123-45678901",
+        "publickey": "-----BEGIN PUBLICKEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAryQICCl6NZ5gDKrnSztO
+        3Hy8PEUcuyvg/ikC+VcIo2SFFSf18a3IMYldIugqqqZCs4/4uVW3sbdLs/6PfgdX
+        7O9D22ZiFWHPYA2k2N744MNiCD1UE+tJyllUhSblK48bn+v1oZHCM0nYQ2NqUkvS
+        OrUZ/wK69Dzu4IvrN4vs9Nes8vbwPa/ddZEzGR0cQMt0JBkhk9kU/qwqUseP1QRJ
+        5I1jR4g8aYPL/ke9K35PxZWuDp3U0UPAZ3PjFAh+5T+fc7gzCs9dPzSHloruU+gl
+        FQIDAQAB
+        -----END PUBLIC KEY-----"
+    }
+
+    HTTP/1.1 201 Created
+    Content-Type: application/json
+
+    {
+        "domain": "012345-6789-0123-45678901",
+        "endpoint": "987654-3210-9876-54321098",
+        "server_certificate": "-----BEGIN CERTIFICATE-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAryQICCl6NZ5gDKrnSztO
+        3Hy8PEUcuyvg/ikC+VcIo2SFFSf18a3IMYldIugqqqZCs4/4uVW3sbdLs/6PfgdX
+        7O9D22ZiFWHPYA2k2N744MNiCD1UE+tJyllUhSblK48bn+v1oZHCM0nYQ2NqUkvS
+        3Hy8PEUcuyvg/ikC+VcIo2SFFSf18a3IMYldIugqqqZCs4/4uVW3sbdLs/6PfgdX
+        7O9D22ZiFWHPYA2k2N744MNiCD1UE+tJyllUhSblK48bn+v1oZHCM0nYQ2NqUkvS
+        3Hy8PEUcuyvg/ikC+VcIo2SFFSf18a3IMYldIugqqqZCs4/4uVW3sbdLs/6PfgdX
+        7O9D22ZiFWHPYA2k2N744MNiCD1UE+tJyllUhSblK48bn+v1oZHCM0nYQ2NqUkvS
+        OrUZ/wK69Dzu4IvrN4vs9Nes8vbwPa/ddZEzGR0cQMt0JBkhk9kU/qwqUseP1QRJ
+        5I1jR4g8aYPL/ke9K35PxZWuDp3U0UPAZ3PjFAh+5T+fc7gzCs9dPzSHloruU+gl
+        FQIDAQAB
+        -----END CERTIFICATE-----",
+        "device_certificate": "-----BEGIN CERTIFICATE-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAryQICCl6NZ5gDKrnSztO
+        3Hy8PEUcuyvg/ikC+VcIo2SFFSf18a3IMYldIugqqqZCs4/4uVW3sbdLs/6PfgdX
+        7O9D22ZiFWHPYA2k2N744MNiCD1UE+tJyllUhSblK48bn+v1oZHCM0nYQ2NqUkvS
+        3Hy8PEUcuyvg/ikC+VcIo2SFFSf18a3IMYldIugqqqZCs4/4uVW3sbdLs/6PfgdX
+        7O9D22ZiFWHPYA2k2N744MNiCD1UE+tJyllUhSblK48bn+v1oZHCM0nYQ2NqUkvS
+        3Hy8PEUcuyvg/ikC+VcIo2SFFSf18a3IMYldIugqqqZCs4/4uVW3sbdLs/6PfgdX
+        7O9D22ZiFWHPYA2k2N744MNiCD1UE+tJyllUhSblK48bn+v1oZHCM0nYQ2NqUkvS
+        OrUZ/wK69Dzu4IvrN4vs9Nes8vbwPa/ddZEzGR0cQMt0JBkhk9kU/qwqUseP1QRJ
+        5I1jR4g8aYPL/ke9K35PxZWuDp3U0UPAZ3PjFAh+5T+fc7gzCs9dPzSHloruU+gl
+        FQIDAQAB
+        -----END CERTIFICATE-----"
+    }
+    
+### Create an access key
+
+#### Creating a new access key
+
+To create your first access key, log in to the mbed Connector webapp. After that, new access keys can be created programmatically. 
+
+To create a new access key:
+
+    POST /api/api_tokens
+
+**Body**
+
+The body, if present, needs to be a JSON object that contains the wanted display name in field 'name'. If no body is given, a random alphanumeric string will be generated for name.
+
+
+|Name|Type|Description|
+|---|---|---|
+|name|`string`| Optional. The display name for the new key.|
+
+**Response**
+
+Response|Description
+---|---
+201|Created, successful response with new access key.
+401|Unauthorized, provided access key is not valid for domain.
+400|Bad Request, error parsing JSON payload.
+
+Acceptable content-types:
+
+- application/json
+
+**Example**
+
+    POST /api/api_tokens
+    Accept: application/json
+    Content-Type: application/json
+
+    {
+        "name": "Access key name #1"
+    }
+
+    HTTP/1.1 201 Created
+    Content-Type: application/json
+
+    {
+        "access_key": "pkDJumPX65wZXrqjyQrd42skwRomzolglEzgrjrntSC8g11UmJgL2Oq5NhQ7MFpmb6EPKkxEKV67ZUxc1A0kygAGHz5stChxMFY8",
+        "name" : "Access key name #1"
+    }
+
+
+** Example **
+
+    POST /api/api_tokens
+    Accept: application/json
+
+    HTTP/1.1 201 Created
+    Content-Type: application/json
+
+    {
+        "access_key": "F2x59HUmziqRI6w3UUj8PmYOMLdMAkpUsHCEMUVym8stcC4TQJa8sjOm2pqf5PGnzobXTW5h7NM7MoxCY0wZcwiWKr5mtxAEkjkw",
+        "name" : "lSUXJA9jTP"
+    }
 
