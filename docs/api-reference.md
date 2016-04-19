@@ -13,8 +13,8 @@ The mbed Device Connector Web API offers functions that manage:
 
 The [Device Connector developer tools](#developer-tools) can be used to:
 
-* [Create new device certificate](#create-certificate)
-* [Create new access key](#create-access-key)
+* [Create a new device certificate](#create-a-certificate)
+* [Create a new access key](#create-an-access-key)
 
 __A note about asynchronous functions__
 
@@ -879,35 +879,28 @@ To read the current value of the limit counter:
     }
     
 ## Developer tools
-The following REST methods help automation of applications. Access key authorization is required.
 
-__Note about using the developer tools__
+The REST methods described below help automation of applications. Access key authorization is required.
 
-A different base URL is required to use these tools. Services can be accessed only from URL
+**Note:** A different base URL is required to use these tools. The services can be accessed only from URL https://connector.mbed.com.
 
-__https://connector.mbed.com__
+### Create a certificate
 
+#### Creating a new certificate for an endpoint
 
+Besides requesting for the `security.h` file from the mbed Connector webapp, the security credentials can be generated programmatically using CSR process. For such request, you need to have the Elliptic Curve private-public keys created. Secp256r1 is recommended, but other 256 bit curves work as well. The public key is sent along with your domain ID in the JSON body as a PEM format string. When you have received the domain and endpoint names and the server and device certificates along with the successful response, you must formulate the `security.h` file manually. The file needs to include the private key that pairs with the public key sent in CSR request.
 
-
-### Create certificate
-
-**Creating a new certificate for endpoint**
-
-Besides requesting security.h file from Connector webapp, the security credentials can be generated programmatically using CSR process. For such request you need to have Elliptic Curve private-public keys created. Secp256r1 is recommended, but other 256 bit curves work also. Public key is sent along with your domain id in JSON body, as PEM format string. After receiving domain and endpoint names and server and device certificates along with the successful response, you must formulate the security.h file manually. The security.h needs to include the private key which pairs with the public key sent in CSR request.
-
-
-Endpoint credentials can be created by issuing the following request:
+To create the endpoint credentials:
 
 	POST /api/cert
 
 **Body**
 
-The body has to be a JSON object that contains the following fields:
+The body needs to be a JSON object that contains the following fields:
 
 |Name|Type|Description|
 |---|---|---|
-|domain|`string`| The id of your domain.|
+|domain|`string`| The ID of your domain.|
 |publickey|`string`| The public key of your Elliptic Curve key pair, in PEM format.|
 
 Both fields are mandatory.
@@ -918,7 +911,7 @@ Response|Description
 ---|---
 201|Created, successful response with credential details.
 401|Unauthorized, provided access key is not valid for domain.
-400|Bad Request, error parsing JSON payload or error reading the public key
+400|Bad Request, error parsing JSON payload or error reading the public key.
 
 Acceptable content-types:
 
@@ -974,19 +967,19 @@ Acceptable content-types:
         -----END CERTIFICATE-----"
     }
     
-### Create access key
+### Create an access key
 
-**Creating a new access key**
+#### Creating a new access key
 
-Initially, you must log in to Connector webapp, to create your first access key. After that, new access keys can be created programmatically. 
+To create your first access key, log in to the mbed Connector webapp. After that, new access keys can be created programmatically. 
 
-New accesskey can be created by issuing the following request:
+To create a new access key:
 
     POST /api/api_tokens
 
 **Body**
 
-The body, if present, has to be a JSON object that contains the wanted display name in field 'name'. If no body is given, a random alphanumeric string will be generated for name.
+The body, if present, needs to be a JSON object that contains the wanted display name in field 'name'. If no body is given, a random alphanumeric string will be generated for name.
 
 
 |Name|Type|Description|
@@ -999,7 +992,7 @@ Response|Description
 ---|---
 201|Created, successful response with new access key.
 401|Unauthorized, provided access key is not valid for domain.
-400|Bad Request, error parsing JSON payload
+400|Bad Request, error parsing JSON payload.
 
 Acceptable content-types:
 
