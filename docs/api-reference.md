@@ -1,6 +1,6 @@
 # API Reference
 
-If you're unfamiliar with mbed Device Connector please read our short introduction to [general concepts](index.md).
+If you're unfamiliar with mbed Device Connector please read our short [introduction](index.md) to general concepts.
 
 The mbed Device Connector Web API offers functions that manage:
 
@@ -130,7 +130,7 @@ When an endpoint is in queue mode, messages sent to the endpoint will not wake u
 
 	GET /v2/endpoints/{endpoint-name}
 
-The list of resources are cached by mbed Device Connector, and this call does not wake up the device.
+The list of resources are cached by mbed Device Connector as long as the device remains registered, and this call does not wake up the device.
 
 **Note:** `endpoint-name` needs to be an exact match of the name of the endpoint. It is not possible to use wildcards here.
 
@@ -174,7 +174,7 @@ Acceptable content-types:
 
 ## Resources
 
-All resource APIs are [asynchronous](index.md#asynchronous-requests). Be aware that these APIs will only respond if the device is turned on and connected to mbed Device Connector. You can also receive [notifications](#notifications) when a resource changes.
+All APIs related to device resources are [asynchronous](index.md#asynchronous-requests). Be aware that these APIs will only respond if the device is turned on and connected to mbed Device Connector. You can also receive [notifications](#notifications) when a resource changes by subscribing to the resource.
 
 ### Non-confirmable requests
 
@@ -478,7 +478,13 @@ The [mbed Client overview](https://docs.mbed.com/docs/mbed-client-guide/en/lates
 
 ## Notifications
 
-Resources can be marked as observable, which allows your application to subscribe to updates from these resources, meaning the server will notify  the  application when a resource changes. An application can either [subscribe to an individual resource](#subscriptions), or use automatic subscriptions  based on matching endpoints to [pre-subscription data](#automatically-subscribe-to-resources).
+Notifications are created when certain events happen on mbed Device Connector:
+* A response for an asynchronous request is ready.
+* A device reports about a change in its resource state (if a subscription exists for the resource).
+* A device registers, re-registers or unregisters, or the registration expires.
+
+
+When you subscribe to an observable resource, your application can subscribe to updates from these resources, meaning the server will notify the application when a resource changes. An application can either [subscribe to an individual resource](#subscriptions), or use automatic subscriptions based on matching endpoints to [pre-subscription data](#automatically-subscribe-to-resources).
 
 Whether or not a resource is observable is determined by [mbed Client](https://docs.mbed.com/docs/mbed-client-guide/en/latest/Introduction/#the-observe-feature), not by mbed Device Connector.
 
@@ -488,6 +494,8 @@ There are two ways of receiving notifications:
 
 * [Register a notification callback](#registering-a-notification-callback).
 * [Use long polling](#long-polling).
+
+mbed Device Connector tries to deliver each notification event for up to 15 minutes after which the event is discarded if it is not delivered. 
 
 We'll review the notification data structure before looking at the registration and notification functions.
 
@@ -673,7 +681,7 @@ As an alternative to the notification callback, you can use HTTP long-poll reque
 
 ## Subscriptions
 
-After you set up [notifications](#notifications), you can subscribe to either individual resources or pre-subscribe to resources
+After you have set up a [notification callback](#notifications), you can subscribe to either individual resources or pre-subscribe to resources.
 
 ### Subscribing to an individual resource ([async](index.md#asynchronous-requests))
 
@@ -790,7 +798,7 @@ Acceptable content-types:
 
 ### Automatically subscribe to resources
 
-Besides manually subscribing to resources, you can also automatically subscribe to resources based on their endpoint name, endpoint type, or listed resources (a pre-subscription). mbed Device Connector will automatically send a subscription request when it encounters an endpoint or resource that matches these definitions.
+Besides manually subscribing to resources, you can also automatically subscribe (a pre-subscription) to resources based on their endpoint name, endpoint type, or listed resources. mbed Device Connector will automatically send a subscription request when it encounters an endpoint or resource that matches these definitions.
 
     PUT /v2/subscriptions
 
