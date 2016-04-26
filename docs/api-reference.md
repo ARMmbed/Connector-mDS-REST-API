@@ -132,7 +132,7 @@ When an endpoint is in queue mode, messages sent to the endpoint will not wake u
 
 The list of resources are cached by mbed Device Connector as long as the device remains registered, and this call does not wake up the device.
 
-**Note:** `endpoint-name` needs to be an exact match of the name of the endpoint. It is not possible to use wildcards here.
+<span style="background-color:#E6E6E6;border:1px solid #000;display:block; height:100%; padding:10px">**Note:** `endpoint-name` needs to be an exact match of the name of the endpoint. It is not possible to use wildcards here.</span>
 
 **Response**
 
@@ -590,7 +590,7 @@ Register a URL to which the server should deliver notifications.
 
     PUT /v2/notification/callback
 
-**Note:** Only one URL can be active. If you register a new URL when another is already active, the old URL is replaced by the new.
+<span style="background-color:#E6E6E6;border:1px solid #000;display:block; height:100%; padding:10px">**Note:** Only one URL can be active. If you register a new URL when another is already active, the old URL is replaced by the new.</span>
 
 **Body**
 
@@ -601,7 +601,7 @@ The body of the request needs to be a JSON object with the following format:
 |url|`string`|The URL to which notifications need to be sent. We recommend that you serve this URL over HTTPS.|
 |headers|`object`|Headers (key/value) that need to be sent with the request. Optional.|
 
-**Note:** The total length of the URL and header values must be no more than 400 characters.
+<span style="background-color:#E6E6E6;border:1px solid #000;display:block; height:100%; padding:10px">**Note:** The total length of the URL and header values must be no more than 400 characters.</span>
 
 The values in the `headers` field are sent as HTTP headers with every request that mbed Device Connector makes to your URL. You could use this to verify that a request originated from mbed Device Connector.
 
@@ -618,7 +618,7 @@ The server responds with `400 Bad Request` if:
 * The URL you passed in is not reachable.
 * The total length of the URL and header values is more than 400 characters.
 
-**Tip:** The response body includes information on why the request failed.
+<span style="background-color:#E6E6E6;border:1px solid #000;display:block; height:100%; padding:10px">**Tip:** The response body includes information on why the request failed.</span>
 
 **Example:**
 
@@ -670,7 +670,7 @@ As an alternative to the notification callback, you can use HTTP long-poll reque
 
 	GET /v2/notification/pull
 
-**Note:** It is mandatory to create a persistent connection, by sending the `Connection: keep-alive` header, to avoid excessive TLS handshakes.
+<span style="background-color:#E6E6E6;border:1px solid #000;display:block; height:100%; padding:10px">**Note:** It is mandatory to create a persistent connection, by sending the `Connection: keep-alive` header, to avoid excessive TLS handshakes.</span>
 
 **Response**
 
@@ -814,7 +814,7 @@ The body has to be a JSON array that contains objects that may have the followin
 
 If you send an empty array, the pre-subscription data will be removed.
 
-**Note:** Changing the pre-subscription data removes *all* the existing subscriptions, this includes individual subscriptions.
+<span style="background-color:#E6E6E6;border:1px solid #000;display:block; height:100%; padding:10px">**Note:** Changing the pre-subscription data removes *all* the existing subscriptions, this includes individual subscriptions.</span>
 
 **Response**
 
@@ -890,7 +890,7 @@ To read the current value of the limit counter:
 
 The REST methods described below help automation of applications. Access key authorization is required.
 
-**Note:** A different base URL is required to use these tools. The services can be accessed only from URL https://connector.mbed.com.
+<span style="background-color:#E6E6E6;border:1px solid #000;display:block; height:100%; padding:10px">**Note:** A different base URL is required to use these tools. The services can be accessed only from URL https://connector.mbed.com.</span>
 
 ### Create a certificate
 
