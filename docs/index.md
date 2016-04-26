@@ -37,7 +37,7 @@ Requests to these APIs return a JSON object containing `async-response-id` in th
 {"async-response-id":"1073741825#521f9d17-c5d7-4769-b89f-b608..."}
 ```
 
-The actual response related to the `async-response-id` can be received by either [registering a notification  callback](#registering-a-notification-callback) or [long polling](#long polling). These mechanisms are explained in the following two chapters. The notification callback and long polling are also used for receiving [notifications](api-reference.md#notifications) about certain events, such as device registration or a change in its resource state.
+The actual response related to the `async-response-id` can be received by either [registering a notification callback](#registering-a-notification-callback) or [long polling](#long-polling). These mechanisms are explained in the following two chapters. The notification callback and long polling are also used for receiving [notifications](api-reference.md#notifications) about certain events, such as device registration or a change in its resource state.
 In these cases, the `async-response-id` is not involved.
 
 
