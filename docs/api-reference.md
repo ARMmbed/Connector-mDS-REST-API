@@ -479,9 +479,10 @@ The [mbed Client overview](https://docs.mbed.com/docs/mbed-client-guide/en/lates
 ## Notifications
 
 Notifications are created when certain events happen on mbed Device Connector:
-* A response for an asynchronous request is ready.
-* A device reports about a change in its resource state (if a subscription exists for the resource).
-* A device registers, re-registers or unregisters, or the registration expires.
+
+- A response for an asynchronous request is ready.
+- A device reports about a change in its resource state (if a subscription exists for the resource).
+- A device registers, re-registers or unregisters, or the registration expires.
 
 A notification is created for each asynchronous request when the response is ready, for example when the device sends a response for a read request. Another case is when you [subscribe](#subscriptions) to a resource, mbed Device Connector starts creating notifications when the resource state changes. The device registration related notifications are always created automatically.
 
