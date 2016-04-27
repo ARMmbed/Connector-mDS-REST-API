@@ -678,7 +678,7 @@ As an alternative to the notification callback, you can use HTTP long-poll reque
 
 ## Subscriptions
 
-When you have set up a [notification callback](#registering-notification-callback), your application can subscribe to either individual resources or pre-subscribe to resources.
+When you have set up a [notification callback](#registering-a-notification-callback), your application can subscribe to either individual resources or pre-subscribe to resources.
 
 When you subscribe to an observable resource, the server notifies your application when the resource changes. Your application can either [subscribe to an individual resource](#subscriptions), or use [pre-subscriptions](#automatically-subscribe-to-resources) to define rules that subscribe automatically to any resources that match those rules.
 
