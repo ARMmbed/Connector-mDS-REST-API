@@ -483,7 +483,7 @@ Notifications are created when certain events happen on mbed Device Connector:
 * A device reports about a change in its resource state (if a subscription exists for the resource).
 * A device registers, re-registers or unregisters, or the registration expires.
 
-A notification is created for each asynchronous request when the response is ready, e.g. when the device sends a response for a read request. Another case is when you [subscribe](#subscriptions) a resource, mbed Device Connector starts creating notifications when the resource state changes. The device registration related notifications are always created automatically.
+A notification is created for each asynchronous request when the response is ready, for example when the device sends a response for a read request. Another case is when you [subscribe](#subscriptions) to a resource, mbed Device Connector starts creating notifications when the resource state changes. The device registration related notifications are always created automatically.
 
 ### Receiving notifications
 
@@ -678,9 +678,9 @@ As an alternative to the notification callback, you can use HTTP long-poll reque
 
 ## Subscriptions
 
-After you have set up a [notification callback](#registering-notification-callback), your application can subscribe to either individual resources or pre-subscribe to resources.
+When you have set up a [notification callback](#registering-notification-callback), your application can subscribe to either individual resources or pre-subscribe to resources.
 
-When you subscribe to an observable resource the server will notify your application when the resource changes. Your application can either [subscribe to an individual resource](#subscriptions), or use [pre-subscriptions](#automatically-subscribe-to-resources) to define rules that subscribe automatically to any resources that match those rules.
+When you subscribe to an observable resource, the server notifies your application when the resource changes. Your application can either [subscribe to an individual resource](#subscriptions), or use [pre-subscriptions](#automatically-subscribe-to-resources) to define rules that subscribe automatically to any resources that match those rules.
 
 Whether or not a resource is observable is determined by [mbed Client](https://docs.mbed.com/docs/mbed-client-guide/en/latest/Introduction/#the-observe-feature), not by mbed Device Connector.
 
