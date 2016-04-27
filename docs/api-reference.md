@@ -759,6 +759,19 @@ When the response is available, on your notification channel:
 |200|Resource is subscribed.|
 |404|Resource is not subscribed.|
 
+Acceptable content-types:
+
+- text/uri-list
+
+**Example:**
+
+    GET /v2/subscriptions/node-001/dev/power
+
+    HTTP/1.1 200 OK
+    Content-Type: text/uri-list
+
+    /subscriptions/node-001/dev/power
+
 ### Reading endpoint's subscriptions
 
 	GET /v2/subscriptions/{endpoint-name}
