@@ -281,7 +281,7 @@ This API can be used to write new values to existing resources, or to create new
 
 Acceptable content types:
 
-*/* (depends on endpoint's resource)
+- `*/*` (depends on endpoint's resource)
 
 *Resource JSON structure*
 
@@ -357,7 +357,7 @@ The body of the request  is passed in as a `char*` to the function in mbed Clien
 
 Acceptable content types:
 
-*/* (depends on endpoint's resource)
+- `*/*` (depends on endpoint's resource)
 
 *Resource JSON structure*
 
