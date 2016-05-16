@@ -328,6 +328,8 @@ The [mbed Client overview](https://docs.mbed.com/docs/mbed-client-guide/en/lates
 
 ### Executing a function on a resource ([async](index.md#asynchronous-requests))
 
+This API can be used to execute functions on existing resources on the device.
+
     POST /v2/endpoints/{endpoint-name}/{resource-path}
 
 **Query string parameters**
