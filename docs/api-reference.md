@@ -411,6 +411,8 @@ A request to delete a resource must be handled by both mbed Client and mbed Devi
 
     DELETE /v2/endpoints/{endpoint-name}/{resource-path}
 
+**Query string parameters**
+
 |Name|Type|Description|
 |---|---|---|
 |noResp|`boolean`|See [Non-confirmable requests](#non-confirmable-requests)|
