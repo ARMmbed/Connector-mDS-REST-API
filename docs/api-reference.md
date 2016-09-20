@@ -590,7 +590,7 @@ Register a URL to which the server should deliver notifications.
 
     PUT /v2/notification/callback
 
-<span style="background-color:#E6E6E6;border:1px solid #000;display:block; height:100%; padding:10px">**Note:** Only one URL can be active. If you register a new URL when another is already active, the old URL is replaced by the new.</span>
+<span style="background-color:#E6E6E6;border:1px solid #000;display:block; height:100%; padding:10px">**Note:** Only one URL per access key can be active. If you register a new URL when another is already active, the old URL is replaced by the new.</span>
 
 **Body**
 
