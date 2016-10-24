@@ -521,7 +521,6 @@ The notification message is delivered in JSON format:
             "path":"{uri-path}",
             "ct":"{content-type}",
             "payload":"{base64-encoded-payload}",
-            "timestamp":"{timestamp}"
             "max-age":"{max-age}"
          }
        ],
