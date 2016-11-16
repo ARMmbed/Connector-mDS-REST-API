@@ -107,7 +107,7 @@ Resources are defined by the endpoint, which runs mbed Client. As a reference:
 * The endpoint name is set in [M2MInterfaceFactory::create_interface](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2minterfacefactory_8h.html).
 * Resources are created via:
     * [M2MInterfaceFactory::create_object](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2minterfacefactory_8h.html) (ObjectId)
-    * [M2MObjectInstance::create_dynamic_resource]https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2mobjectinstance_8h.html) and [M2MObjectInstance::create_static_resource](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2mobjectinstance_8h.html) (ResourceId)
+    * [M2MObjectInstance::create_dynamic_resource](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2mobjectinstance_8h.html) and [M2MObjectInstance::create_static_resource](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2mobjectinstance_8h.html) (ResourceId)
 
 You can find full documentation in the [mbed Client documentation](https://docs.mbed.com/docs/mbed-client-guide/en/latest/Introduction/).
 
