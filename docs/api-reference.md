@@ -1117,7 +1117,7 @@ Acceptable content-types:
     }
 ```
 
-** Example **
+**Example**
 
 ```
     POST /api/api_tokens
