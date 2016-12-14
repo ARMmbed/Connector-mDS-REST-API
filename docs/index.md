@@ -1,4 +1,4 @@
-# mbed Device Connector Web API
+## mbed Device Connector Web API
 
 The mbed Device Connector Web API is an HTTP REST API that lets you control your devices through mbed Device Connector. The API allows web apps to get and set data, trigger events, and subscribe to changes on the device, without needing to know about the protocol your device uses to connect.
 
@@ -9,7 +9,7 @@ This document is an introduction to the mbed Device Connector Web API. If you ar
 
 Be aware that mbed Device Connector acts as an interface between your web application and the device. When the device is powered off, you cannot query the last known state. mbed Device Connector does not provide long term caching or historic data.
 
-## Authentication
+### Authentication
 
 To connect your web app to the mbed Device Connector API you need an [access key](https://connector.mbed.com/#accesskeys). Every request sent to Connector uses your API key as part of the `Authorization` HTTP header, to validate the request to your mbed account and the devices that account controls.
 
@@ -19,7 +19,7 @@ Authorization: Bearer YOUR_ACCESS_KEY
 
 If the Authorization header is not set, or if the access key is incorrect, requests return a `401 Unauthorized` status code.
 
-## Asynchronous requests
+### Asynchronous requests
 
 Many functions in the mbed Device Connector API are asynchronous because it is not guaranteed
 that an action (such as writing to a device) will happen straight away, as the device might be in deep sleep
@@ -41,7 +41,7 @@ The actual response related to the `async-response-id` can be received by either
 In these cases, the `async-response-id` is not involved.
 
 
-### Registering a notification callback
+#### Registering a notification callback
 
 A notification callback, also called a *webhook*, is the primary mechanism for receiving a response for
 an asynchronous request or for receiving event notifications.
@@ -51,13 +51,14 @@ a `PUT` request to a URL of your choice. This means that you will need a public-
 receive the responses. If the URL of your web server is for example ``https://www.my-mbed-consumer.com/notify``,
 you need to tell the API to send a notification to that URL:
 
+```
     PUT /notification/callback
     Content-Type: application/json
 
     { "url": "https://www.my-mbed-consumer.com/notify" }
 
     HTTP/1.1 204 No Content
-
+```
 
 You can also specify which headers are sent with the `PUT` requests, for example to verify that a request actually came from mbed Device Connector. For more information, see [Registering a notification  callback](api-reference.md#registering-a-notification-callback).
 
@@ -67,23 +68,21 @@ a `400 Bad Request` response is returned, with information on why the request fa
 If you did not register a URL where mbed Device Connector can notify you, calls to asynchronous APIs respond
 with `412 Precondition Failed`, and the body says `No notification channel`.
 
-<span style="background-color:#E6E6E6;  border:1px solid #000;display:block; height:100%; padding:10px">
-**Note:** The callback registration stays valid forever except when your server cannot be reached for 7 days.
-In this case, the callback registration is removed. Therefore, always re-register on application startup.
-</span>
+<span class="notes">**Note:** The callback registration stays valid forever except when your server cannot be reached for 7 days.
+In this case, the callback registration is removed. Therefore, always re-register on application startup.</span>
 
-### Long polling
+#### Long polling
 
 If it’s not possible to have a public facing callback URL, for example when developing on your local machine, you can use [long polling](api-reference.md#long-polling) to check for new messages. However, to reduce network traffic and to increase performance we recommend that you use callback URLs (webhooks) whenever possible.
 
 
-## The mbed Device Connector data model
+### The mbed Device Connector data model
 
 The mbed Device Connector data model consists of three levels. At the top there is your mbed account. Then there are endpoints, which are physical devices running [mbed Client](https://www.mbed.com/en/development/software/mbed-client/) and registered to an account. Each endpoint can have multiple resources it exposes. These resources may be readable and writable (like LEDs), or read only (like a serial number string). The endpoint controls which resources are exposed.
 
 Resources are categorized using the [Lightweight Machine to Machine (LWM2M) protocol](http://technical.openmobilealliance.org/Technical/technical-information/omna/lightweight-m2m-lwm2m-object-registry) from the Open Mobile Alliance (OMA), which has three levels of structure:
 
-*ObjectID/ObjectInstance/ResourceId*
+**_ObjectID/ObjectInstance/ResourceId_**
 
 * ObjectID: used to uniquely identify the thing being exposed, which is typically a grouping of other things under it. DeviceInformation (3), Temperature (3303), Humidity (3304) and Geolocation are all Object IDs.
 * ObjectInstance: denotes which instance of the ObjectID you are talking about. There can be multiple temperature sensors on an endpoint, so the first would be /3303/0, and the second would be /3303/1, and so on.
@@ -94,13 +93,13 @@ Resources are categorized using the [Lightweight Machine to Machine (LWM2M) prot
 
 Using the LWM2M specification it’s easy for services and machines to discover resources and have a standard way of controlling them. The specification is essentially a giant look-up table. The [full OMA LWM2M specification can be found here](http://technical.openmobilealliance.org/Technical/technical-information/omna/lightweight-m2m-lwm2m-object-registry).
 
-### Example
+#### Example
 
-If you want to read the sensor value (resource ID 5700) from a temperature object (3303) on endpoint1 you need to ``GET /endpoints/endpoint1/3303/0/5700``.
+If you want to read the sensor value (resource ID 5700) from a temperature object (3303) on endpoint1 you need to `GET /endpoints/endpoint1/3303/0/5700`.
 
-Likewise, to discover what endpoints are on a domain you can ``GET /endpoints``, and to discover what resources are on endpoint1 you can ``GET /endpoints/endpoint1``.
+Likewise, to discover what endpoints are on a domain you can ``GET /endpoints``, and to discover what resources are on endpoint1 you can `GET /endpoints/endpoint1`.
 
-### Defining resources in mbed Client
+#### Defining resources in mbed Client
 
 Resources are defined by the endpoint, which runs mbed Client. As a reference:
 
@@ -111,7 +110,7 @@ Resources are defined by the endpoint, which runs mbed Client. As a reference:
 
 You can find full documentation in the [mbed Client documentation](https://docs.mbed.com/docs/mbed-client-guide/en/latest/Introduction/).
 
-## Example applications
+### Example applications
 
 We have example web applications available for [Java](https://github.com/ARMmbed/mbed-webapp-example/), Node.js and Python.
 
