@@ -5,7 +5,7 @@ The mbed Device Connector Web API is an HTTP REST API that lets you control your
 This document is an introduction to the mbed Device Connector Web API. If you are familiar with the API you can jump straight to the [API Reference](api-reference.md).
 
 
-![The flow between mbed Client and your application through mbed Device Connector](assets/connector-flow.png)
+![The flow between mbed Client and your application through mbed Device Connector](https://s3-us-west-2.amazonaws.com/cloud-docs-images/connector-flow.png)
 
 Be aware that mbed Device Connector acts as an interface between your web application and the device. When the device is powered off, you cannot query the last known state. mbed Device Connector does not provide long term caching or historic data.
 
@@ -89,7 +89,7 @@ Resources are categorized using the [Lightweight Machine to Machine (LWM2M) prot
 * ResourceID: used to identify a unique resource on an object. The Resource ID is also where the values are held. Things like Max Measured Value (5602), Min Measured Value (5601), and Sensor Value (5700) are all examples of resource IDs.
 
 
-![mbed Device Connector data model](assets/data_model.png)
+![mbed Device Connector data model](https://s3-us-west-2.amazonaws.com/cloud-docs-images/data_model.png)
 
 Using the LWM2M specification it’s easy for services and machines to discover resources and have a standard way of controlling them. The specification is essentially a giant look-up table. The [full OMA LWM2M specification can be found here](http://technical.openmobilealliance.org/Technical/technical-information/omna/lightweight-m2m-lwm2m-object-registry).
 
