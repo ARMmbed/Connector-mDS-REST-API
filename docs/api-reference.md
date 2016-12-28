@@ -1,6 +1,6 @@
 ## API Reference
 
-If you're unfamiliar with mbed Device Connector please read our short [introduction](index.md) to general concepts.
+If you're unfamiliar with mbed Device Connector please read our short [introduction](/docs/latest/mbed-cloud-product-development#mbed-device-connector-web-api) to general concepts.
 
 The mbed Device Connector Web API offers functions that manage:
 
@@ -18,7 +18,7 @@ The [Device Connector developer tools](#developer-tools) can be used to:
 
 __A note about asynchronous functions__
 
-A number of functions in the mbed Device Connector API are asynchronous, because it's not guaranteed that an action (such as writing to a device) will happen straight away, as the device might be in deep sleep. These APIs are marked with '(async)' in the API reference. For information about handling asynchronous functions, see: [Asynchronous requests](index.md#asynchronous-requests).
+A number of functions in the mbed Device Connector API are asynchronous, because it's not guaranteed that an action (such as writing to a device) will happen straight away, as the device might be in deep sleep. These APIs are marked with '(async)' in the API reference. For information about handling asynchronous functions, see: [Asynchronous requests](/docs/latest/mbed-cloud-product-development#asynchronous-requests).
 
 ### Versions
 
@@ -79,7 +79,7 @@ To call an old version of the API, you must prefix the desired version of the ab
 
 ### Endpoints
 
-Endpoints are physical devices running [mbed Client](https://www.mbed.com/en/development/software/mbed-client/). For more information about mbed Device Connector’s data model, see the [REST API introduction](index.md#the-mbed-device-connector-data-model).
+Endpoints are physical devices running [mbed Client](https://www.mbed.com/en/development/software/mbed-client/). For more information about mbed Device Connector’s data model, see the [REST API introduction](/docs/latest/mbed-cloud-product-development#the-mbed-device-connector-data-model).
 
 #### Listing all endpoints
 
@@ -186,7 +186,7 @@ Content-Type: application/json
 
 ### Resources
 
-All APIs related to device resources are [asynchronous](index.md#asynchronous-requests). Be aware that these APIs will only respond if the device is turned on and connected to mbed Device Connector. You can also receive [notifications](#notifications) when a resource changes by subscribing to the resource.
+All APIs related to device resources are [asynchronous](/docs/latest/mbed-cloud-product-development#asynchronous-requests). Be aware that these APIs will only respond if the device is turned on and connected to mbed Device Connector. You can also receive [notifications](#notifications) when a resource changes by subscribing to the resource.
 
 #### Non-confirmable requests
 
@@ -194,7 +194,7 @@ All resource APIs have the parameter `noResp`. If a request is made with `noResp
 
 If calls with this parameter enabled succeed, they return with the status code `204 No Content`. If the underlying protocol does not support non-confirmable requests, or if the endpoint is registered in queue mode, the response is status code `409 Conflict`.
 
-#### Reading from a resource ([async](index.md#asynchronous-requests))
+#### Reading from a resource ([async](/docs/latest/mbed-cloud-product-development#asynchronous-requests))
 
 ```
 GET /v2/endpoints/{endpoint-name}/{resource-path}
@@ -267,7 +267,7 @@ When the response is available, on your notification channel:
 }
 ```
 
-#### Writing to a resource ([async](index.md#asynchronous-requests))
+#### Writing to a resource ([async](/docs/latest/mbed-cloud-product-development#asynchronous-requests))
 
 This API can be used to write new values to existing resources, or to create new resources on the device. The `resource-path` does not have to exist - it can be created by the call.
 
@@ -346,7 +346,7 @@ When the response is available, on your notification channel:
 
 The [mbed Client overview](https://docs.mbed.com/docs/mbed-client-guide/en/latest/Introduction/#the-write-operation) contains information on how to process updates on the device side.
 
-#### Executing a function on a resource ([async](index.md#asynchronous-requests))
+#### Executing a function on a resource ([async](/docs/latest/mbed-cloud-product-development#asynchronous-requests))
 
 This API can be used to execute functions on existing resources on the device.
 
@@ -428,7 +428,7 @@ When the response is available, on your notification channel:
 
 The [mbed Client overview](https://docs.mbed.com/docs/mbed-client-guide/en/latest/Introduction/#the-execute-operation) contains information on how to handle the execute operation on the device side.
 
-#### Deleting a resource ([async](index.md#asynchronous-requests))
+#### Deleting a resource ([async](/docs/latest/mbed-cloud-product-development#asynchronous-requests))
 
 A request to delete a resource must be handled by both mbed Client and mbed Device Connector. The resource is not deleted from mbed Device Connector until the delete is handled by mbed Client.
 
@@ -729,7 +729,7 @@ When you subscribe to an observable resource, the server notifies your applicati
 
 Whether or not a resource is observable is determined by [mbed Client](https://docs.mbed.com/docs/mbed-client-guide/en/latest/Introduction/#the-observe-feature), not by mbed Device Connector.
 
-#### Subscribing to an individual resource ([async](index.md#asynchronous-requests))
+#### Subscribing to an individual resource ([async](/docs/latest/mbed-cloud-product-development#asynchronous-requests))
 
 This function subscribes to an individual resource.
 
