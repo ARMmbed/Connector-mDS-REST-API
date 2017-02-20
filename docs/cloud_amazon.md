@@ -1,4 +1,4 @@
-## Connecting devices with AWS IoT and mbed Connector 
+## Connecting devices with AWS IoT and mbed Device Connector 
 
 <span class="warnings">**Warning:** This tutorial uses prototypes and is not suitable for production.</span>
 
