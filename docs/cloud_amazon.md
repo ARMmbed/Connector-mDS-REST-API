@@ -194,12 +194,12 @@ If you have an existing IAM User, then you can simply create a new AccessKey for
 
 1. Click **Create Access Key**.
 
-  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_existing_user.png)
+    ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_existing_user.png)
 
 1. Save both keys.    
    * Click **Show** to see your Secret Access Key.
 
-  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_keys.png)
+    ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_keys.png)
 
 1. Click **Close**.
 
@@ -280,9 +280,7 @@ Your AWS bridge is now configured! You can restart your device and see messages 
 1. Go to the AWS dashboard: [link]
 1. In the left-hand menu, click **Registry** > **Things**.
 1. You should see your device listed as a Thing.
-
   ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_things.png)
-
 1. In the left-hand menu, click **Test**.
     * Result: This opens the MQTT dashboard:
 
