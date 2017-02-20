@@ -138,11 +138,11 @@ __Running the applicaton__
 1. Log into the [AWS Management Console](https://aws.amazon.com/console/).
 1. Click **AWS IoT**.
 
-![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_in_menu.png)
+  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_in_menu.png)
 
 1. If you do not have one already, create an Instance:
 
-![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_get_started.png)
+  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_get_started.png)
 
 1. Open the Dashboard and click **Test**.
 
@@ -169,13 +169,13 @@ __Running the applicaton__
     * Set Access type to **Programmatic Access**.
     * Click **Next Permissions** 
 
-![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_user.png)
+  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_user.png)
 
 1. When the new IAM User is created, you will be shown your keys.
     * Click **Show** to see your Secret Access Key.
 1. Save both keys.
 
-![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_keys.png)
+  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_keys.png)
 
 1. Click **Close**.
 
@@ -194,12 +194,12 @@ If you have an existing IAM User, then you can simply create a new AccessKey for
 
 1. Click **Create Access Key**.
 
-![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_existing_user.png)
+  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_existing_user.png)
 
 1. Save both keys.    
    * Click **Show** to see your Secret Access Key.
 
-![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_keys.png)
+  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_keys.png)
 
 1. Click **Close**.
 
@@ -227,13 +227,13 @@ Amazon's Identity and Access Management service (IAM) users should have administ
 
 1. Run the following git command: 
 
-    ```json
+    ```
     $  git clone https://github.com/ARMmbed/connector-bridge-container-installer
     ```
 	
 1. `cd` into the installer repository:
 
-    ```json
+    ```
     % cd connector-bridge-container-installer
     ```
 
@@ -251,7 +251,7 @@ Amazon's Identity and Access Management service (IAM) users should have administ
 
 1. Docker downloads the bridge container from Docker Hub. 
 
-    **Note:** When the script finishes running, it shows an IP address. If you're working on Mac OS X or Linux, please make a note of the IP address.
+    <span class="notes">**Note:** When the script finishes running, it shows an IP address. If you're working on Mac OS X or Linux, please make a note of the IP address.</note>
 
 #### Configuring the bridge 
 
@@ -281,7 +281,7 @@ Your AWS bridge is now configured! You can restart your device and see messages 
 1. In the left-hand menu, click **Registry** > **Things**.
 1. You should see your device listed as a Thing.
 
-![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_things.png)
+  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_things.png)
 
 1. In the left-hand menu, click **Test**.
     * Result: This opens the MQTT dashboard:
@@ -310,12 +310,11 @@ The application we installed on the device can receive a toggle that turns the L
 
 1. In the field highlighted above, enter the following: `mbed/put/<endpoint_type>/<endpoint_name>/311/0/5850`
 
-    **Tip:** `<endpoint_type>` and `<endpoint_name>` are listed in the observations. 
+    <span class="tips">**Tip:** `<endpoint_type>` and `<endpoint_name>` are listed in the observations.</span>
+    
 2. In the terminal area below, enter the following: `{"path":"/311/0/5850", "ep":"ENDPOINT_NAME_GOES_HERE", "new_value":"0","coap_verb":"put"}`
     
-    **Note:** 
-    * Make `ENDPOINT_NAME_GOES_HERE` your actual endpoint name.
-    * Make `"new_value":"0"` to turn the blue LED off.
+    <span class="notes">**Note:** Make `ENDPOINT_NAME_GOES_HERE` your actual endpoint name and `"new_value":"0"` to turn the blue LED off.
   
 1. Click **Publish to topic**.
 1. Your blue LED should turn off (or on if you used `1`).
