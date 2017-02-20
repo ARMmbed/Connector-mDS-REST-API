@@ -296,9 +296,9 @@ Your AWS bridge is now configured! You can restart your device and see messages 
 1. In the subscription topic field, enter: `mbed/cmd-response/#`.
 1. Click **Subscribe to this topic**.
 
-Result: 
+  Result: 
 
-![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_subscriptions.png)
+  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_subscriptions.png)
 
 1. Toggle between the messages by clicking on the topic names.
 
