@@ -31,7 +31,7 @@ An mbed device. In this tutorial, we use the [K64F development board](https://de
 #### Accounts
 
 - Create an account with [mbed developer](https://developer.mbed.org).
-- Using your mbed developer credentials, check that you can log into [mbed Cloud Connect](https://connector.mbed.com).
+- Using your mbed developer credentials, check that you can log into [mbed Device Connector](https://connector.mbed.com).
 - Create and set up an IBM Bluemix account:
     - Go to the [Bluemix Dashboard](https://console.ng.bluemix.net/).
     - Click **Sign up**.
@@ -86,7 +86,7 @@ This example is a clean and simple mbed endpoint which exposes two CoAP resource
 1. From the left-side menu, select **My applications** >> **Access Keys**.
 1. Click **Create new access key**.
 1. Give the key a name.
-1. Save the key. You will need it to configure the Watson IoT ARM mbed Cloud Connect Bridge.
+1. Save the key. You will need it to configure the Watson IoT ARM mbed Device Connector Bridge.
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/access_key.png)</span>
 
