@@ -4,4 +4,8 @@ use directory_urls: false
 pages:
 - ['index.md','ARM mbed Device Connector','Introduction to the ARM mbed Device Connector API']
 - ['api-reference.md','mbed Device Connector API Reference','mbed Device Connector API Reference']
+- ['tutorials_intro', 'Tutorials']
+- ['cloud_amazon.md', 'Tutorials']
+- ['cloud_azure.md', 'Tutorials']
+- ['cloud_watson.md', 'Tutorials]
 
