@@ -1,8 +1,8 @@
-## Connecting IoT devices to Microsoft Azure IoTHub with mbed Cloud Connect
+## Connecting IoT devices to Microsoft Azure IoTHub with mbed Device Connector
 
 ### Introduction
 
-This tutorial explains how to connect your mbed device to Azure IoTHub, using mbed Cloud Connect and ARMs prototype IoTHub Connector Bridge.
+This tutorial explains how to connect your mbed device to Azure IoTHub, using mbed Device Connector and ARMs prototype IoTHub Connector Bridge.
 
 Upon completion, you will be able to see and interact with your mbed devices from within the Azure IoTHub ecosystem.
 
@@ -17,7 +17,7 @@ Upon completion, you will be able to see and interact with your mbed devices fro
 #### Accounts
 
 1. Create an account with [mbed developer](https://developer.mbed.org).
-1. Using your mbed developer credentials, check that you can log in to [mbed Cloud Connect](https://connector.mbed.com).
+1. Using your mbed developer credentials, check that you can log in to [mbed Device Connector](https://connector.mbed.com).
 1. Create and setup a Microsoft Azure account:
     - Go to the [Azure portal](https://www.azure.com).
     - Click **Free Account** > **Start for free**.
@@ -66,7 +66,7 @@ Upon completion, you will be able to see and interact with your mbed devices fro
 
 #### Set the provisioning credentials in your endpoint code
 
-1. Open the mbed Cloud Connect dashboard: [https://connector.mbed.com](https://connector.mbed.com)
+1. Open the mbed Device Connector dashboard: [https://connector.mbed.com](https://connector.mbed.com)
 1. In the left sidebar, click **Security Credentials** >> **Get My Security Credentials**
 1. Copy all contents of `security.h`.
     * IMPORTANT: Make a note of the `MBED_ENDPOINT_NAME` and `MBED_DOMAIN` values.
@@ -97,7 +97,7 @@ Upon completion, you will be able to see and interact with your mbed devices fro
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_endpoint.png)</span>
 
-#### Set-up the ARM IoTHub mbed Cloud Connect bridge
+#### Set-up the ARM IoTHub mbed Device Connector bridge
 
 Before you begin, make sure you have the following tools installed and working:
 
@@ -109,7 +109,7 @@ Before you begin, make sure you have the following tools installed and working:
     * `mbed Serial Port` seen in Windows Device Manager when K64F USB is connected
 * PuTTY.
 
-#### Create your mbed Cloud Connect access key
+#### Create your mbed Device Connector access key
 
 1. Open the mbed Cloud Connect dashboard and log in: [https://connector.mbed.com](https://connector.mbed.com)
 1. In the left-hand menu, click **Access Keys**.
@@ -155,7 +155,7 @@ Azure will create the IoTHub instance.
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_sas_token.png)</span>
 
 
-#### Import the mbed Cloud Connect IoTHub bridge installer
+#### Import the mbed Device Connector IoTHub bridge installer
 
 1. Launch the Docker QuickStart Terminal
 1. Enter the following `git` command:
@@ -164,7 +164,7 @@ Azure will create the IoTHub instance.
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_docker.png)</span>
 
 
-#### Import the mbed Cloud Connect IoTHub bridge container
+#### Import the mbed Device Connector IoTHub bridge container
 1. Go to the installer repo:
     * `cd connector-bridge-container-installer`
 1. Run the installer script (look at options):
