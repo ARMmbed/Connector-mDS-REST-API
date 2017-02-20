@@ -6,7 +6,7 @@ This tutorial explains how to connect your mbed device to Watson IoT, using mbed
 
 By the end, your mbed device will be able to deliver data to the Watson IoT analytics service.
 
-<span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/overview.png)</span>
+<span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/overview_dc.png)</span>
 
 It guides you through the following tasks:
 
