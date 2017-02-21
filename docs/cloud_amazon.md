@@ -150,11 +150,11 @@ __Running the applicaton__
 
 #### Determining your AWS region
 
-1. Determine your AWS Region from the Test Console URL:
-    * Your URL should look something like this: 
+Determine your AWS Region from the Test Console URL:
+* Your URL should look something like this: 
 `https://console.aws.amazon.com/iotv2/home?region=us-east-1#/test` 
-    * Make a note of your "region" parameter value
-        * In the above example, the AWS Region is `us-east-1`. 
+* Make a note of your "region" parameter value
+  - In the above example, the AWS Region is `us-east-1`. 
 
 #### Create your AWS Access Key and ID (New IAM User)
 
