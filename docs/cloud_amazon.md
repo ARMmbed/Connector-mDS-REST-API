@@ -295,7 +295,7 @@ Your AWS bridge is now configured! You can restart your device and see messages 
 1. In the subscription topic field, enter: `mbed/notify/#`.
 1. Click **Subscribe to this topic**.
 
-##### Subscribe to the command-response topci
+##### Subscribe to the command-response topic
 1. In the subscription topic field, enter: `mbed/cmd-response/#`.
 1. Click **Subscribe to this topic**.
 
