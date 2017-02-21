@@ -138,11 +138,11 @@ __Running the applicaton__
 1. Log into the [AWS Management Console](https://aws.amazon.com/console/).
 1. Click **AWS IoT**.
 
-  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_in_menu.png)
+    ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_in_menu.png)
 
 1. If you do not have one already, create an Instance:
 
-  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_get_started.png)
+    ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_get_started.png)
 
 1. Open the Dashboard and click **Test**.
 
