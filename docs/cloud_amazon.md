@@ -151,9 +151,14 @@ __Running the applicaton__
 #### Determining your AWS region
 
 Determine your AWS Region from the Test Console URL:
-* Your URL should look something like this: 
-`https://console.aws.amazon.com/iotv2/home?region=us-east-1#/test` 
-* Make a note of your "region" parameter value
+
+- Your URL should look something like this:
+
+```
+https://console.aws.amazon.com/iotv2/home?region=us-east-1#/test
+```
+
+- Make a note of your "region" parameter value
   - In the above example, the AWS Region is `us-east-1`. 
 
 #### Create your AWS Access Key and ID (New IAM User)
@@ -169,13 +174,13 @@ Determine your AWS Region from the Test Console URL:
     * Set Access type to **Programmatic Access**.
     * Click **Next Permissions** 
 
-  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_user.png)
+    ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_user.png)
 
 1. When the new IAM User is created, you will be shown your keys.
     * Click **Show** to see your Secret Access Key.
 1. Save both keys.
 
-  ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_keys.png)
+    ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_keys.png)
 
 1. Click **Close**.
 
