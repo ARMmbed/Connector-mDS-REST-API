@@ -1,4 +1,4 @@
-## Connecting IoT devices to the cloud with IBM Watson IoT and mbed Device Connector
+ ## Connecting IoT devices to the cloud with IBM Watson IoT and mbed Device Connector
 
 ### Introduction
 
@@ -6,21 +6,22 @@ This tutorial explains how to connect your mbed device to Watson IoT, using mbed
 
 By the end, your mbed device will be able to deliver data to the Watson IoT analytics service.
 
-<span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/overview_dc.png)</span>
+<span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/watson_overview.png)</span>
 
 It guides you through the following tasks:
 
 1. [Log into the online IDE and import the K64F project](#log-into-the-online-ide-and-import-the-k64f-project)
-1. [Create your mbed Device Connector Access Key](#create-your-mbed-device-connector-access-key)
+1. [Create your mbed Device Connector Access Key](#create-your-mbed-connector-access-key)
 1. [Set the developer credentials in your endpoint code](#set-the-developer-credentials-in-your-endpoint-code)
 1. [Run your endpoint code](#run-your-endpoint-code)
 1. [Create your own Watson IoT Instance in your Bluemix account](#create-your-own-watson-iot-instance-in-your-bluemix-account)
 1. [Create a sample Watson IoT NodeRED application](#create-a-sample-watson-iot-nodered-application)
 1. [Bind the Watson NodeRED application to your Watson IoT instance](#bind-the-watson-nodered-application-to-your-watson-iot-instance)
-1. [Configure the Watson IoT ARM mbed Device Connector Bridge](#configure-the-watson-iot-arm-mbed-device-connector-bridge)
+1. [Configure the Watson IoT ARM mbed Device Connector Bridge](#configure-the-watson-iot-arm-mbed-cloud-connect-bridge)
 1. [Import the NodeRED Flow example](#import-the-nodered-flow-example)
 1. [Configure your new Watson IoT Application Node Flow](#configure-your-new-watson-iot-application-node-flow)
 1. [Finally, check that it all works](#finally-check-that-it-all-works)
+1. [Troubleshooting](#troubleshooting)
 
 ### What you need
 
@@ -97,10 +98,9 @@ This example is a clean and simple mbed endpoint which exposes two CoAP resource
 1. In the left sidebar, select **Security Credentials** >> **Get My Security Credentials**.
 1. Copy all contents of `security.h`. 
  
-	**Note:** Make note of the `MBED_ENDPOINT_NAME` and `MBED_DOMAIN` values - you will use them to configure the Watson IoT ARM mbed Cloud Connect Bridge.
+	**Note:** Make note of the `MBED_ENDPOINT_NAME` and `MBED_DOMAIN` values - you will use them to configure the Watson IoT ARM mbed Device Connector Bridge.
 1. Go back to your online IDE session.
-1. In the sample project, replace `security.h` with the the new `security.h` that you copied from the Connect dashboard.
-1. Save.
+1. In the sample project, replace `security.h` with the the new `security.h` that you copied from the Connect dashboard, and save.
 1. Select the project name and click **Compile**. The endpoint code compiles for the K64F.
 1. The online IDE downloads a `bin` file into your Downloads directory. Drag and drop this file to your `MBED` flash drive. 
    
@@ -139,26 +139,31 @@ This example is a clean and simple mbed endpoint which exposes two CoAP resource
 1. Open the Bluemix dashboard: [https://console.ng.bluemix.net](https://console.ng.bluemix.net)
 1. Select **Services** >> **Internet of Things**.
 1. Click **Get Started**.
-1. Configure your Watson IoT instance.
-1. From the *Connect* to drop-down list, select **Leave unbound**.
+1. Keep the **Connect to** drop-down selection as **Leave unbound**.
 1. Scroll down and select the **Free** plan option.
 1. Click **Create**
 1. Your Watson IoT instance is created, and you should see the Watson IoT dashboard.
-1. Click **Connect your devices** to open the dashboard.
+1. Under the **Manage** tab, click **Launch** to open the dashboard.
 1. Click **Apps** >> **Generate API Key**.
+
+    <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/watson_generate_key.png)</span>
+
 1. Make a note of the **API Key** and the **Authentication Token**. You will need them when you configure your application node flow.
 1. Add a comment and click **Generate**.
 
 #### Create a sample Watson IoT NodeRED application
 
 1. Open the Bluemix dashboard: [https://console.ng.bluemix.net](https://console.ng.bluemix.net)
-1. Click **Create Application**.
+1. Using the hamburger menu (top left), select **Apps** >> **Dashboard**.
+1. Click **Create App**.
 1. Click **NodeRED Starter**.
 1. Enter an **App Name** (must be unique).
 1. Make a note of your application URL. It has the following format: `<app name>.mybluemix.net`. You will need it when you import the NodeRED Flow example.
 1. Click **Create**.
 1. The application will stage (this might take a few minutes). 
 1. When staging is complete, the application reports `app is running`.
+
+    <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/watson_node_red.png)</span>
 
 #### Bind the Watson NodeRED application to your Watson IoT instance
 
@@ -168,7 +173,8 @@ The previous stage took you to the Watson dashboard:
 
 1. Click **Connections** >> **Connect Existing**.
 1. Click on your Watson IoT Instance badge, then **Connect**.
-1. Your NodeRED application needs to restage (this might take a long time).
+2. A popup message will ask if you want to restage, click **Restage**.
+1. Your NodeRED application needs to restage (this might take a few minutes).
 1. Wait until the state changes to `Your app is running`.
 
 <span class="notes">**Note:** Keep this window open!</span>
@@ -179,7 +185,7 @@ The previous stage took you to the Watson dashboard:
 
 1. Open the Watson IoT Dashboard: [https://console.ng.bluemix.net](https://console.ng.bluemix.net)
 1. Click **Extensions** (bottom icon) >> **Add Extension**.
-1. For the **ARM mbed Connector** option, click **Add** >> **Setting up**.
+1. For the **ARM mbed Connector** option, click **Add** >> **Set up**.
 1. Paste your mbed Device Connector Access key and `MBED_DOMAIN` values into the corresponding fields.
 1. Click **Check Connection**.
 1. If the connection is okay, click **Done**.
@@ -198,7 +204,7 @@ The previous stage took you to the Watson dashboard:
 1. Navigate to the URL that you recorded earlier for your Watson IoT NodeRED Application: `http://<app name>.mybluemix.net`
 1. Select **go to your NodeRED flow editor**. 
 1. Click the hamburger menu icon (far top-right) >> **Import** >> **Clipboard**.
-1. Paste the JSON code from step 4 into the **Paste nodes here** window and click **OK**.
+1. Paste the JSON code from step 4 into the **Paste nodes here** window and click **Import**.
 
 #### Configure your new Watson IoT Application Node Flow
 
@@ -214,31 +220,31 @@ You need the Watson API Key and Watson Auth Token that you got in the section [C
 
 ##### Procedure
 
-1. Click the *accelerator observations* node.
+1. Double-click the *accelerator observations* node.
 1. Using the drop-down lists, set the following:
-    * Authentication is your **API Key**.
-    * API Key: 
+    * **Authentication** is "API Key".
+    * **API Key**: 
 		1. Click the edit (pencil) icon.
 		1. Provide a name.
 		1. Paste your Watson API Key and your Watson Auth Token into the relevant fields.
 		1. Click **Update** to save.
-    * Input Type is **Device Event**.
-    * Device Type is **mbed-endpoint** or **all**.
-    * Device ID can be found in `security.h`, under `MBED_ENDPOINT_NAME`.
-    * Event is **notify** (for CoAP observations).
-1. Click **Ok**.
+    * **Input Type** is "Device Event".
+    * **Device Type** is "mbed-endpoint" or "all".
+    * **Device ID** can be found in `security.h`, under `MBED_ENDPOINT_NAME`.
+    * **Event** is "notify" (for CoAP observations).
+1. Click **Done**.
 
     <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/watson_configure.png)</span>
 
 1. Click the *PUT* node.
 1. Using the drop-down lists, set the following:
-    * Authentication is **API Key**.
-    * API Key is the same as above (for accelerator observation).
-    * Input Type is **Device Command**.
-    * Device Type is **mbed-endpoint** or **all**.
-    * Device ID can be found in `security.h`, under `MBED_ENDPOINT_NAME`.
-    * Event is **PUT** (all-caps).
-1. Click **Ok**.
+    * **Authentication** is "API Key".
+    * **API Key** is the same as above (for accelerator observation).
+    * **Input Type** is "Device Command".
+    * **Device Type** is "mbed-endpoint" or "all".
+    * **Device ID** can be found in `security.h`, under `MBED_ENDPOINT_NAME`.
+    * **Command Type** is "PUT" (all-caps).
+1. Click **Done**.
 
 Lastly, we have to configure the remaining “Orange” command builder nodes. Note that each LED ON/OFF has a Base64 encoded value; no other encoding is supported. **1** is ON, **0** is OFF.
 
@@ -278,6 +284,8 @@ You can toggle your LED on and off by clicking the **Turn LED OFF**/**ON** nodes
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/nodered_debug.png)</span>
 
+**Note** If you do not see output from the device, under the debug tab, see the Troubleshooting section below.
+
 ##### Check Watson IoT devices
 
 1. Open [your Watson dashboard](https://console.ng.bluemix.net).
@@ -287,3 +295,16 @@ You can toggle your LED on and off by clicking the **Turn LED OFF**/**ON** nodes
 1. You can watch CoAP use your bridge to notify of events (observations):
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/watson_events.png)</span>
+
+##### Troubleshooting
+
+###### Problem: There is no debug output
+
+Explanation: This usually means that the mbed device cannot be reached on the network. 
+
+Tips: 
+
+1. Shake the device - this should prompt the device to emit sensor readings. If nothing appears in the debug output, continue...
+1. Go back to your mbed Device Connector dashboard, and see if your device is listed. If it is not listed, continue...
+1. Check your network. The following ports must be open:
+            `TCP 5684`, `TCP 5683`, `UDP 5684`, and `UDP 5683`.
