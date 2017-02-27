@@ -1,4 +1,4 @@
- ## Connecting IoT devices to the cloud with IBM Watson IoT and mbed Device Connector
+## Connecting IoT devices to the cloud with IBM Watson IoT and mbed Device Connector
 
 ### Introduction
 
