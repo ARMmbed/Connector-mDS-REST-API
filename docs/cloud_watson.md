@@ -71,6 +71,12 @@ This example is a clean and simple mbed endpoint which exposes two CoAP resource
 
 1. Go to [the mbed Online Compiler (online IDE)](https://developer.mbed.org/compiler/).
 1. Right-click **My Programs**, and select **Import Program** > **From URL…**
+    * NOTE: If this is your first time using the online compiler, a popup message prompts you to add a platform to your account. You need to do this.
+        *  Click **Add platform**. 
+        *  Select the **FRDM-K64F** board from the grid of options that appears. 
+        *  Click **Add to my compiler**. 
+        *  When it has been added, click **Open mbed compiler**. 
+        *  In the popup that appears, leave the options as they are, and click **Open**. 
 1. Enter the following URL: `https://github.com/ARMmbed/mbed-ethernet-sample-techcon2016/`
 1. Leave the **Update all libraries to the latest revision** box unchecked. 
 1. Click **Import**. 
