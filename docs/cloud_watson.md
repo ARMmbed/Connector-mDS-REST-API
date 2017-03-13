@@ -140,6 +140,45 @@ This example is a clean and simple mbed endpoint which exposes two CoAP resource
 
     <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/endpoint_registered_putty.png)</span>
 
+#### Import the mbed Device Connector IoTHub bridge installer
+
+1. Launch the Docker QuickStart Terminal
+1. Enter the following `git` command:
+    * `git clone https://github.com/ARMmbed/connector-bridge-container-installer`
+
+<span class="images">![](https://lh4.googleusercontent.com/bAEQRQmMVQGX0Cf5j-g98rxAF1s0Uxh9sXzD3PBJc2S0AO1-eCiIG7ibfZ1T8kvt42D5SWeLcktTyn8=w2714-h2252-rw)</span>
+
+
+#### Import the mbed Device Connector IoTHub bridge container
+1. Go to the installer repo:
+    * `cd connector-bridge-container-installer`
+1. Run the installer script (look at options):
+    * `./get_bridge.sh`
+1. Run the installer script with options:
+    * `% ./get_bridge.sh watson use-long-polling`
+The Bridge container will import from DockerHub.
+
+<span class="images">![](https://lh5.googleusercontent.com/T-KK3QKNvCIt1S8Nx1AhHppQV_QpKLSF92MslPDBcNVv1iSYXbIHiLPe-neoAhSLkLVwuSsELBeeURk=w2714-h2252-rw)</span>
+
+
+
+#### Configure your IoTHub bridge
+
+Your container IP address is: `192.168.99.100`.
+
+1. Open Firefox or Chrome, and go to: [https://192.168.99.100:8234](https://192.168.99.100:8234)
+1. Accept the self signed certificate. The credentials are:
+    * Username: `admin`
+    * Password: `admin`
+1. Enter the name of your IoTHub, and click **Save**.
+1. Enter the Connector API Token, and click **Save**.
+1. Enter your SAS Token, and click **Save**.
+1. Click **Restart**.
+
+Your IoTHub bridge is now configured.
+
+<span class="images">![](https://lh6.googleusercontent.com/AS8iKNNyPV0b8EAGvA2JpncGF1tpMJ7Pvzq54vZKfd8yQPcjueJfH8y064zhGWGODnGLVDAarAq835U=w2576-h2252-rw)</span>
+
 #### Create your own Watson IoT instance in your Bluemix account
 
 1. Open the Bluemix dashboard: [https://console.ng.bluemix.net](https://console.ng.bluemix.net)
