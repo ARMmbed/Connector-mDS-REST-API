@@ -1,6 +1,6 @@
-## Connecting IoT devices to the cloud with IBM Watson IoT and mbed Device Connector
+### Connecting IoT devices to the cloud with IBM Watson IoT and mbed Device Connector
 
-### Introduction
+#### Introduction
 
 This tutorial explains how to connect your mbed device to Watson IoT, using mbed Device Connector and Watson’s Connector Bridge.
 
@@ -23,13 +23,13 @@ It guides you through the following tasks:
 1. [Finally, check that it all works](#finally-check-that-it-all-works)
 1. [Troubleshooting](#troubleshooting)
 
-### What you need
+#### What you need
 
-#### Device
+##### Device
 
 An mbed device. In this tutorial, we use the [K64F development board](https://developer.mbed.org/platforms/FRDM-K64F/).
 
-#### Accounts
+##### Accounts
 
 - Create an account with [mbed developer](https://developer.mbed.org).
 - Using your mbed developer credentials, check that you can log into [mbed Device Connector](https://connector.mbed.com).
@@ -40,9 +40,9 @@ An mbed device. In this tutorial, we use the [K64F development board](https://de
     - A confirmation email is sent to the email address you specified. It must be acknowledged.
     - Log into your Bluemix account and specify the default organization and space.
 
-#### Tools
+##### Tools
 
-##### Windows
+###### Windows
 
 * If you are working on a Windows version earlier than Windows 10, please install the [mbed USB Serial driver](https://developer.mbed.org/media/downloads/drivers/mbedWinSerial_16466.exe):
 
@@ -51,7 +51,7 @@ An mbed device. In this tutorial, we use the [K64F development board](https://de
 * Optional: you can also install the terminal application [CoolTerm](http://freeware.the-meiers.org/CoolTerm_Win.zip).
 * Install either the Chrome or Firefox browsers. Note that IE will not work; you must use either Chrome or Firefox.
 
-##### Mac
+###### Mac
 
 * Install a serial terminal such as [CoolTerm](http://freeware.the-meiers.org/CoolTerm_Mac.zip).
 
@@ -63,9 +63,9 @@ An mbed device. In this tutorial, we use the [K64F development board](https://de
 * Install a serial terminal such as [CoolTerm](http://freeware.the-meiers.org/CoolTerm_Linux.zip).
 * Install either the Chrome or Firefox browsers.
 
-### Process
+#### Process
 
-#### Log into the online IDE and import the K64F project
+##### Log into the online IDE and import the K64F project
 
 This example is a clean and simple mbed endpoint which exposes two CoAP resources: accelerometer and LED.
 
@@ -86,7 +86,7 @@ This example is a clean and simple mbed endpoint which exposes two CoAP resource
     1. If you see a different device, click the device to open the **Select a Platform** window and select the FRDM-K64F. 
     1. If the FRDM-K64F is not available for selection, add it to your compiler by clicking the **Open mbed Compiler** button [on the K64F page](https://developer.mbed.org/platforms/FRDM-K64F/).
 
-#### Create your mbed Device Connector Access Key
+##### Create your mbed Device Connector Access Key
 
 1. Open the mbed Device Connector Dashboard: [https://connector.mbed.com](https://connector.mbed.com)
 1. Log in.
@@ -98,7 +98,7 @@ This example is a clean and simple mbed endpoint which exposes two CoAP resource
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/access_key.png)</span>
 
 
-#### Set the developer credentials in your endpoint code
+##### Set the developer credentials in your endpoint code
 
 1. Open the mbed Device Connector dashboard: [https://connector.mbed.com](https://connector.mbed.com)
 1. In the left sidebar, select **Security Credentials** >> **Get My Security Credentials**.
@@ -114,7 +114,7 @@ This example is a clean and simple mbed endpoint which exposes two CoAP resource
 1. The green LED on the board flickers for a bit, then stops. You may see the board dismount and remount. 
 1. The sample project is now running on your board.
 
-#### Run your endpoint code
+##### Run your endpoint code
 
 1. Open your serial terminal:
     * CoolTerm:  
@@ -140,7 +140,7 @@ This example is a clean and simple mbed endpoint which exposes two CoAP resource
 
     <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/endpoint_registered_putty.png)</span>
 
-#### Import the mbed Device Connector IoTHub bridge installer
+##### Import the mbed Device Connector IoTHub bridge installer
 
 1. Launch the Docker QuickStart Terminal
 1. Enter the following `git` command:
@@ -149,7 +149,7 @@ This example is a clean and simple mbed endpoint which exposes two CoAP resource
 <span class="images">![](https://lh4.googleusercontent.com/bAEQRQmMVQGX0Cf5j-g98rxAF1s0Uxh9sXzD3PBJc2S0AO1-eCiIG7ibfZ1T8kvt42D5SWeLcktTyn8=w2714-h2252-rw)</span>
 
 
-#### Import the mbed Device Connector IoTHub bridge container
+##### Import the mbed Device Connector IoTHub bridge container
 1. Go to the installer repo:
     * `cd connector-bridge-container-installer`
 1. Run the installer script (look at options):
@@ -161,8 +161,7 @@ The Bridge container will import from DockerHub.
 <span class="images">![](https://lh5.googleusercontent.com/T-KK3QKNvCIt1S8Nx1AhHppQV_QpKLSF92MslPDBcNVv1iSYXbIHiLPe-neoAhSLkLVwuSsELBeeURk=w2714-h2252-rw)</span>
 
 
-
-#### Configure your IoTHub bridge
+##### Configure your IoTHub bridge
 
 Your container IP address is: `192.168.99.100`.
 
@@ -179,7 +178,7 @@ Your IoTHub bridge is now configured.
 
 <span class="images">![](https://lh6.googleusercontent.com/AS8iKNNyPV0b8EAGvA2JpncGF1tpMJ7Pvzq54vZKfd8yQPcjueJfH8y064zhGWGODnGLVDAarAq835U=w2576-h2252-rw)</span>
 
-#### Create your own Watson IoT instance in your Bluemix account
+##### Create your own Watson IoT instance in your Bluemix account
 
 1. Open the Bluemix dashboard: [https://console.ng.bluemix.net](https://console.ng.bluemix.net)
 1. Select **Services** >> **Internet of Things**.
@@ -196,7 +195,7 @@ Your IoTHub bridge is now configured.
 1. Make a note of the **API Key** and the **Authentication Token**. You will need them when you configure your application node flow.
 1. Add a comment and click **Generate**.
 
-#### Create a sample Watson IoT NodeRED application
+##### Create a sample Watson IoT NodeRED application
 
 1. Open the Bluemix dashboard: [https://console.ng.bluemix.net](https://console.ng.bluemix.net)
 1. Using the hamburger menu (top left), select **Apps** >> **Dashboard**.
@@ -210,7 +209,7 @@ Your IoTHub bridge is now configured.
 
     <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/watson_node_red.png)</span>
 
-#### Bind the Watson NodeRED application to your Watson IoT instance
+##### Bind the Watson NodeRED application to your Watson IoT instance
 
 The previous stage took you to the Watson dashboard:
 
@@ -226,7 +225,7 @@ The previous stage took you to the Watson dashboard:
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/watson_dashboard1.png)</span>
 
-#### Configure the Watson IoT ARM mbed Device Connector Bridge
+##### Configure the Watson IoT ARM mbed Device Connector Bridge
 
 1. Open the Watson IoT Dashboard: [https://console.ng.bluemix.net](https://console.ng.bluemix.net)
 1. Click **Extensions** (bottom icon) >> **Add Extension**.
@@ -237,7 +236,7 @@ The previous stage took you to the Watson dashboard:
 
 <span class="notes">**Note:** Keep this window open.</span>
 
-#### Import the NodeRED Flow example
+##### Import the NodeRED Flow example
 
 1. Open your Online IDE workspace.
 1. Open your `mbed-ethernet-sample-techcon2016` project.
@@ -251,7 +250,7 @@ The previous stage took you to the Watson dashboard:
 1. Click the hamburger menu icon (far top-right) >> **Import** >> **Clipboard**.
 1. Paste the JSON code from step 4 into the **Paste nodes here** window and click **Import**.
 
-#### Configure your new Watson IoT Application Node Flow
+##### Configure your new Watson IoT Application Node Flow
 
 In the diagram below, the input and output nodes are indicated in blue, and the command nodes are indicated in orange:
 
@@ -259,11 +258,11 @@ In the diagram below, the input and output nodes are indicated in blue, and the 
 
 You need to link the blue and orange nodes to your Watson IoT instance. We will start with the blue nodes.
 
-##### Prerequisites
+###### Prerequisites
 
 You need the Watson API Key and Watson Auth Token that you got in the section [Create your own Watson IoT Instance in your Bluemix account](#create-your-own-watson-iot-instance-in-your-bluemix-account).
 
-##### Procedure
+###### Procedure
 
 1. Double-click the *accelerator observations* node.
 1. Using the drop-down lists, set the following:
@@ -297,15 +296,14 @@ For both of the LED OFF/ON nodes:
 
 1. Select the node and make a note the JSON payload created. 
 1. Set the Device ID to be the same value as `MBED_ENDPOINT_NAME`.
-
-	**Note:** The Device ID field is to the right of the JSON structure. Scroll or enlarge the window to see it.
+	<span class="notes">**Note:** The Device ID field is to the right of the JSON structure. Scroll or enlarge the window to see it.</span>
 1. Replace `MBED_ENDPOINT_NAME_GOES_HERE` with the actual `MBED_ENDPOINT_NAME` value.
 1. Click **Done**. 
 1. In the upper right of your NodeRED console, click the red **Deploy** button.
 
-#### Final steps
+##### Final steps
 
-##### Check the serial terminal
+###### Check the serial terminal
 
 1. Press the **Reset** button on your mbed device (next to the USB port).
 1. Open the **Debug** window in your NodeRED editor.
@@ -319,7 +317,7 @@ For both of the LED OFF/ON nodes:
 
     <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/endpoint_registered_putty.png)</span>
 
-##### NodeRED debug info
+###### NodeRED debug info
 
 1. Open your Watson IoT application and NodeRED flow editor.
 1. Open the debug window.
@@ -329,9 +327,9 @@ You can toggle your LED on and off by clicking the **Turn LED OFF**/**ON** nodes
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/nodered_debug.png)</span>
 
-**Note** If you do not see output from the device, under the debug tab, see the Troubleshooting section below.
+<span class="notes">**Note** If you do not see output from the device, under the debug tab, see the Troubleshooting section below.</span>
 
-##### Check Watson IoT devices
+###### Check Watson IoT devices
 
 1. Open [your Watson dashboard](https://console.ng.bluemix.net).
 1. Select **Devices**.
@@ -341,13 +339,13 @@ You can toggle your LED on and off by clicking the **Turn LED OFF**/**ON** nodes
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/watson_events.png)</span>
 
-##### Troubleshooting
+###### Troubleshooting
 
-###### Problem: There is no debug output
+**Problem:** There is no debug output
 
-Explanation: This usually means that the mbed device cannot be reached on the network. 
+**Explanation:** This usually means that the mbed device cannot be reached on the network. 
 
-Tips: 
+**Tips:**
 
 1. Shake the device - this should prompt the device to emit sensor readings. If nothing appears in the debug output, continue...
 1. Go back to your mbed Device Connector dashboard, and see if your device is listed. If it is not listed, continue...
