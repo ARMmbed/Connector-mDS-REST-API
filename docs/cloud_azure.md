@@ -1,6 +1,6 @@
-## Connecting IoT devices to Microsoft Azure IoTHub with mbed Device Connector
+### Connecting IoT devices to Microsoft Azure IoTHub with mbed Device Connector
 
-### Introduction
+#### Introduction
 
 This tutorial explains how to connect your mbed device to Azure IoTHub, using mbed Device Connector and ARMs prototype IoTHub Connector Bridge.
 
@@ -8,13 +8,13 @@ Upon completion, you will be able to see and interact with your mbed devices fro
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_overview.png)</span>
 
-### What you need:
+#### What you need:
 
-#### Devices
+##### Devices
 1. A Windows PC.
 2. An mbed device. In this tutorial, we use the [K64F development board](https://developer.mbed.org/platforms/FRDM-K64F/).
 
-#### Accounts
+##### Accounts
 
 1. Create an account with [mbed developer](https://developer.mbed.org).
 1. Using your mbed developer credentials, check that you can log in to [mbed Device Connector](https://connector.mbed.com).
@@ -25,7 +25,7 @@ Upon completion, you will be able to see and interact with your mbed devices fro
         * A confirmation email is sent to the email address you specify. It must be acknowledged.
     - Log into your Azure account.
 
-#### Tools
+##### Tools
 
 **IMPORTANT: You must use a Windows PC.**
 
@@ -42,11 +42,11 @@ Upon completion, you will be able to see and interact with your mbed devices fro
 1. Optional: Install either the Chrome or Firefox browser. 
 
 
-### Process
+#### Process
 
 1. First things first, connect a USB cable and Ethernet cable to your K64F board.
 
-#### Log into the Online IDE and Import the K64F Project
+##### Log into the Online IDE and Import the K64F Project
 
 1. Go to [https://developer.mbed.org](https://developer.mbed.org).
 1. Click **Compiler** (top left).
@@ -64,7 +64,7 @@ Upon completion, you will be able to see and interact with your mbed devices fro
  
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_import.png)</span>
 
-#### Set the provisioning credentials in your endpoint code
+##### Set the provisioning credentials in your endpoint code
 
 1. Open the mbed Device Connector dashboard: [https://connector.mbed.com](https://connector.mbed.com)
 1. In the left sidebar, click **Security Credentials** >> **Get My Security Credentials**
@@ -83,7 +83,7 @@ Upon completion, you will be able to see and interact with your mbed devices fro
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_provisioning.png)</span>
 
-#### Run your endpoint code
+##### Run your endpoint code
 1. Open your Serial Terminal.
     * PuTTY for Windows : Use Windows Device Manager to find the COM port of your mbed device.
 1. For the endpoint serial configuration, set the baud rate to `115200` baud, defaults for everything else: `8`, `N`, `one`.
@@ -97,7 +97,7 @@ Upon completion, you will be able to see and interact with your mbed devices fro
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_endpoint.png)</span>
 
-#### Set-up the ARM IoTHub mbed Device Connector bridge
+##### Set-up the ARM IoTHub mbed Device Connector bridge
 
 Before you begin, make sure you have the following tools installed and working:
 
@@ -109,7 +109,7 @@ Before you begin, make sure you have the following tools installed and working:
     * `mbed Serial Port` seen in Windows Device Manager when K64F USB is connected
 * PuTTY.
 
-#### Create your mbed Device Connector access key
+##### Create your mbed Device Connector access key
 
 1. Open the mbed Cloud Connect dashboard and log in: [https://connector.mbed.com](https://connector.mbed.com)
 1. In the left-hand menu, click **Access Keys**.
@@ -118,7 +118,7 @@ Before you begin, make sure you have the following tools installed and working:
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_api_token.png)</span>
 
-#### Create your Azure IoTHub instance
+##### Create your Azure IoTHub instance
 
 1. Log into the Azure Portal: https://azure.microsoft.com
 1. Search for "IoTHub".
@@ -130,7 +130,7 @@ Azure will create the IoTHub instance.
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_hub.png)</span>
 
 
-#### Get your IoTHub Connection String
+##### Get your IoTHub Connection String
 
 1. Open the IoTHub instance dashboard, and select your IoTHub resource.
 1. Click **Settings**.
@@ -141,9 +141,7 @@ Azure will create the IoTHub instance.
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_primary_string.png)</span>
 
-
-
-#### Create your SAS Token with DeviceExplorer
+##### Create your SAS Token with DeviceExplorer
 
 1. Open DeviceExplorer.
 1. Paste your connection string here.
@@ -155,7 +153,7 @@ Azure will create the IoTHub instance.
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_sas_token.png)</span>
 
 
-#### Import the mbed Device Connector IoTHub bridge installer
+##### Import the mbed Device Connector IoTHub bridge installer
 
 1. Launch the Docker QuickStart Terminal
 1. Enter the following `git` command:
@@ -164,7 +162,8 @@ Azure will create the IoTHub instance.
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_docker.png)</span>
 
 
-#### Import the mbed Device Connector IoTHub bridge container
+##### Import the mbed Device Connector IoTHub bridge container
+
 1. Go to the installer repo:
     * `cd connector-bridge-container-installer`
 1. Run the installer script (look at options):
@@ -175,9 +174,7 @@ The Bridge container will import from DockerHub.
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_container.png)</span>
 
-
-
-#### Configure your IoTHub bridge
+##### Configure your IoTHub bridge
 
 Your container IP address is: `192.168.99.100`.
 
@@ -194,7 +191,7 @@ Your IoTHub bridge is now configured.
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_bridge.png)</span>
 
-#### Check that it all works
+##### Check that it all works
 
 1. Press the **reset** button on your mbed device (next to the USB port).
 1. Look for `endpoint registered` in the serial terminal.
@@ -204,7 +201,7 @@ Your IoTHub bridge is now configured.
 1. Under **Data** you should see output (if you do not see output, shake your device to generate some accelerometer readings).
 1. Click **monitor** to start monitoring.
 
-#### Interact with your device using DeviceExplorer
+##### Interact with your device using DeviceExplorer
 
 1. Open DeviceExplorer and click **Messages to Device**.
 1. In the Message field, enter the following JSON, replacing `MBED_ENDPOINT_GOES_HERE` with your actual endpoint name:
@@ -214,7 +211,4 @@ Your IoTHub bridge is now configured.
 The blue LED should turn ON or OFF depending on `new_value` being `0` or `1`.
 
 <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/azure_interact.png)</span>
-
-
-
 
