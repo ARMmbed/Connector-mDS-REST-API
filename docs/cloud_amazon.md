@@ -1,4 +1,4 @@
-## Connecting devices with AWS IoT and mbed Device Connector 
+### Connecting devices with AWS IoT and mbed Device Connector 
 
 <span class="warnings">**Warning:** This tutorial uses prototypes and is not suitable for production.</span>
 
@@ -8,7 +8,7 @@ We're going to use mbed Connector and ARM's prototype AWS IoT Connector Bridge t
 1. Create an instance of ARM's prototype AWS IoT Connector Bridge and bind it to your Amazon and Connector accounts.
 1. Explore the device's data telemetry with Amazon's web-based MQTT client.
 
-### What you need
+#### What you need
 
 __Accounts:__
 
@@ -38,9 +38,9 @@ __Device:__
 
 NXP-FRDM-K64F. Please connect a USB and Ethernet cable to the device.
 
-### Getting the sample application on your device
+#### Getting the sample application on your device
 
-#### Adding the sample application to your mbed Online Compiler
+##### Adding the sample application to your mbed Online Compiler
 
 To import the mbed sample project to the mbed Online Compiler:
    
@@ -62,7 +62,7 @@ To import the mbed sample project to the mbed Online Compiler:
 	
     <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/frdm_k64f.png)</span>
 
-#### Getting credentials for your sample application
+##### Getting credentials for your sample application
 
 1. Go to your [mbed Connector dashboard](https://connector.mbed.com).
 1. In the left hand navigation pane, click **My devices** > **Security credentials**. The Security Credentials window opens.
@@ -79,7 +79,7 @@ To import the mbed sample project to the mbed Online Compiler:
 
     <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/security_header.png)</span>
 
-#### Running the application on your device
+##### Running the application on your device
 
 __Installing the application__
 
@@ -110,9 +110,9 @@ __Running the applicaton__
 		
     <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/endpoint_registered.png)</span>
 
-### Setting up the Bridge
+#### Setting up the Bridge
 
-#### Creating an mbed Connector API token
+##### Creating an mbed Connector API token
 
 1. Go to your [mbed Connector dashboard](https://connector.mbed.com).
 1. In the left hand navigation pane, click **My applications** > **Access keys**. The Access Keys window opens.
@@ -133,7 +133,7 @@ __Running the applicaton__
 
 1. Save the token.
 
-#### Creating an AWS IoT instance
+##### Creating an AWS IoT instance
 
 1. Log into the [AWS Management Console](https://aws.amazon.com/console/).
 1. Click **AWS IoT**.
@@ -148,7 +148,7 @@ __Running the applicaton__
 
 ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_dashboard.png)
 
-#### Determining your AWS region
+##### Determining your AWS region
 
 Determine your AWS Region from the Test Console URL:
 
@@ -161,7 +161,7 @@ https://console.aws.amazon.com/iotv2/home?region=us-east-1#/test
 - Make a note of your "region" parameter value
   - In the above example, the AWS Region is `us-east-1`. 
 
-#### Create your AWS Access Key and ID (New IAM User)
+##### Create your AWS Access Key and ID (New IAM User)
 
 1. Using Chrome, go to: [http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-setting-up.html](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-setting-up.html)
     * Complete the steps in Amazon's guide to create the Access Key and ID
@@ -185,7 +185,7 @@ https://console.aws.amazon.com/iotv2/home?region=us-east-1#/test
 1. Click **Close**.
 
 
-#### Create your AWS Access Key and ID (Existing IAM User)
+##### Create your AWS Access Key and ID (Existing IAM User)
 
 If you have an existing IAM User, then you can simply create a new AccessKey for that user:
 
@@ -209,7 +209,7 @@ If you have an existing IAM User, then you can simply create a new AccessKey for
 1. Click **Close**.
 
 
-#### Verifying administrator permissions on IAM
+##### Verifying administrator permissions on IAM
 
 Amazon's Identity and Access Management service (IAM) users should have administrator permissions to create *thing shadows*, which you will need later. 
 
@@ -221,7 +221,7 @@ Amazon's Identity and Access Management service (IAM) users should have administ
 
     <span class="images">![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_attach_policy.png)</span>
 
-#### Importing the Connector AWS IoT bridge installer
+##### Importing the Connector AWS IoT bridge installer
 
 1. Accessing a terminal:
     * On Windows: launch the Docker Quickstart Terminal. 
@@ -258,7 +258,7 @@ Amazon's Identity and Access Management service (IAM) users should have administ
 
     <span class="notes">**Note:** When the script finishes running, it shows an IP address. If you're working on Mac OS X or Linux, please make a note of the IP address.</note>
 
-#### Configuring the bridge 
+##### Configuring the bridge 
 
 1. Open Chrome or Firefox:
     * On Windows: go to `https://192.168.99.100:8234`.
@@ -278,9 +278,9 @@ Amazon's Identity and Access Management service (IAM) users should have administ
 
 Your AWS bridge is now configured! You can restart your device and see messages coming into the AWS IoT via Amazon's MQTT Client.
 
-### Putting it all together
+#### Putting it all together
 
-#### Connecting to the device
+##### Connecting to the device
 
 1. Go to the AWS dashboard: [link]
 1. In the left-hand menu, click **Registry** > **Things**.
@@ -291,11 +291,11 @@ Your AWS bridge is now configured! You can restart your device and see messages 
 
 ![](https://s3-us-west-2.amazonaws.com/cloud-docs-images/aws_iot_test_dashboard.png)
 
-##### Subscribe to the observation topic
+###### Subscribe to the observation topic
 1. In the subscription topic field, enter: `mbed/notify/#`.
 1. Click **Subscribe to this topic**.
 
-##### Subscribe to the command-response topic
+###### Subscribe to the command-response topic
 1. In the subscription topic field, enter: `mbed/cmd-response/#`.
 1. Click **Subscribe to this topic**.
 
@@ -305,7 +305,7 @@ Your AWS bridge is now configured! You can restart your device and see messages 
 
 1. Toggle between the messages by clicking on the topic names.
 
-#### Interacting with the device
+##### Interacting with the device
 
 The application we installed on the device can receive a toggle that turns the LED on (`1`) and off (`0`). To trigger it, we will send a CoAP ``put`` command to the device.
 
