@@ -103,12 +103,12 @@ Likewise, to discover what endpoints are on a domain you can ``GET /endpoints``,
 
 Resources are defined by the endpoint, which runs mbed Client. As a reference:
 
-* The endpoint name is set in [M2MInterfaceFactory::create_interface](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2minterfacefactory_8h.html).
+* The endpoint name is set in [M2MInterfaceFactory::create_interface](/docs/v5.4/mbed-client-doxy/class_m2_m_interface_factory.html#affa14e1e72d5ac1955615329e7a37033).
 * Resources are created via:
-    * [M2MInterfaceFactory::create_object](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2minterfacefactory_8h.html) (ObjectId)
-    * [M2MObjectInstance::create_dynamic_resource](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2mobjectinstance_8h.html) and [M2MObjectInstance::create_static_resource](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2mobjectinstance_8h.html) (ResourceId)
+    * [M2MInterfaceFactory::create_object](/docs/v5.4/mbed-client-doxy/class_m2_m_interface_factory.html#a99472fdf5a073df3c5f1b3879f73b282) (ObjectId)
+    * [M2MObjectInstance::create_dynamic_resource](/docs/v5.4/mbed-client-doxy/class_m2_m_object_instance.html#a17b4afaa4bd1933ea8b66b7c42e779b3) and [M2MObjectInstance::create_static_resource](/docs/v5.4/mbed-client-doxy/class_m2_m_object_instance.html#a5d200a7f700138cefca112e6c11e7f84) (ResourceId)
 
-You can find full documentation in the [mbed Client documentation](/docs/v5.4/mbed-client/index.html).
+Read the full [mbed Client API documentation](/docs/v5.4/mbed-client-doxy/index.html) and the rest in the [mbed Client guide](/docs/v5.4/mbed-client/index.html).
 
 ### Example applications
 
