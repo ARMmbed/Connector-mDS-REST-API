@@ -2,7 +2,7 @@
 
 The mbed Device Connector Web API is an HTTP REST API that lets you control your devices through mbed Device Connector. The API allows web apps to get and set data, trigger events, and subscribe to changes on the device, without needing to know about the protocol your device uses to connect.
 
-This document is an introduction to the mbed Device Connector Web API. If you are familiar with the API you can jump straight to the [API Reference](link to api-reference).
+This document is an introduction to the mbed Device Connector Web API. If you are familiar with the API you can jump straight to the [API Reference](docs/v5.4/device-connector-api/api-reference.html).
 
 
 ![The flow between mbed Client and your application through mbed Device Connector](https://s3-us-west-2.amazonaws.com/cloud-docs-images/connector-flow.png)
@@ -25,11 +25,11 @@ Many functions in the mbed Device Connector API are asynchronous because it is n
 that an action (such as writing to a device) will happen straight away, as the device might be in deep sleep
 or otherwise slow to respond. These functions are marked with '(async)' in the API reference:
 
-* [Reading from a resource](api-reference.md#reading-from-a-resource-async)
-* [Executing a function on a resource](api-reference.md#executing-a-function-on-a-resource-async)
-* [Writing to a resource](api-reference.md#writing-to-a-resource-async)
-* [Deleting a resource](api-reference.md#deleting-a-resource-async)
-* [Subscribing to an individual resource](api-reference.md#subscribing-to-an-individual-resource-async)
+* [Reading from a resource](/docs/v5.4/device-connector-api/api-reference.html#reading-from-a-resource-async)
+* [Executing a function on a resource](/docs/v5.4/device-connector-api/api-reference.html#executing-a-function-on-a-resource-async)
+* [Writing to a resource](/docs/v5.4/device-connector-api/api-reference.html#writing-to-a-resource-async)
+* [Deleting a resource](/docs/v5.4/device-connector-api/api-reference.html#deleting-a-resource-async)
+* [Subscribing to an individual resource](/docs/v5.4/device-connector-api/api-reference.html#subscribing-to-an-individual-resource-async)
 
 Requests to these APIs return a JSON object containing `async-response-id` in the following format:
 
@@ -37,7 +37,7 @@ Requests to these APIs return a JSON object containing `async-response-id` in th
 {"async-response-id":"1073741825#521f9d17-c5d7-4769-b89f-b608..."}
 ```
 
-The actual response related to the `async-response-id` can be received by either [registering a notification callback](#registering-a-notification-callback) or [long polling](#long-polling). These mechanisms are explained in the following two chapters. The notification callback and long polling are also used for receiving [notifications](api-reference.md#notifications) about certain events, such as device registration or a change in its resource state.
+The actual response related to the `async-response-id` can be received by either [registering a notification callback](#registering-a-notification-callback) or [long polling](#long-polling). These mechanisms are explained in the following two chapters. The notification callback and long polling are also used for receiving [notifications](/docs/v5.4/device-connector-api/api-reference.html#notifications) about certain events, such as device registration or a change in its resource state.
 In these cases, the `async-response-id` is not involved.
 
 
@@ -60,7 +60,7 @@ you need to tell the API to send a notification to that URL:
     HTTP/1.1 204 No Content
 ```
 
-You can also specify which headers are sent with the `PUT` requests, for example to verify that a request actually came from mbed Device Connector. For more information, see [Registering a notification  callback](api-reference.md#registering-a-notification-callback).
+You can also specify which headers are sent with the `PUT` requests, for example to verify that a request actually came from mbed Device Connector. For more information, see [Registering a notification  callback](/docs/v5.4/device-connector-api/api-reference.html#registering-a-notification-callback).
 
 mbed Device Connector will make a PUT request to this URL immediately. If the URL you passed in is not reachable,
 a `400 Bad Request` response is returned, with information on why the request failed in the response body.
@@ -73,7 +73,7 @@ In this case, the callback registration is removed. Therefore, always re-registe
 
 #### Long polling
 
-If it’s not possible to have a public facing callback URL, for example when developing on your local machine, you can use [long polling](link to api-reference#long-polling) to check for new messages. However, to reduce network traffic and to increase performance we recommend that you use callback URLs (webhooks) whenever possible.
+If it’s not possible to have a public facing callback URL, for example when developing on your local machine, you can use [long polling](/docs/v5.4/device-connector-api/api-reference.html#long-polling) to check for new messages. However, to reduce network traffic and to increase performance we recommend that you use callback URLs (webhooks) whenever possible.
 
 
 ### The mbed Device Connector data model
@@ -108,7 +108,7 @@ Resources are defined by the endpoint, which runs mbed Client. As a reference:
     * [M2MInterfaceFactory::create_object](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2minterfacefactory_8h.html) (ObjectId)
     * [M2MObjectInstance::create_dynamic_resource](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2mobjectinstance_8h.html) and [M2MObjectInstance::create_static_resource](https://docs.mbed.com/docs/mbed-client-guide/en/latest/api/m2mobjectinstance_8h.html) (ResourceId)
 
-You can find full documentation in the [mbed Client documentation](https://docs.mbed.com/docs/mbed-client-guide/en/latest/Introduction/).
+You can find full documentation in the [mbed Client documentation](/docs/v5.4/mbed-client/index.html).
 
 ### Example applications
 
