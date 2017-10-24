@@ -1,6 +1,6 @@
 ## API Reference
 
-If you're unfamiliar with mbed Device Connector please read our short [introduction](/docs/v5.4/device-connector-api/index.html) to general concepts.
+If you're unfamiliar with mbed Device Connector please read our short [introduction](/docs/v1.2/legacy-products/mbed-device-connector-web-api.html) to general concepts.
 
 The mbed Device Connector Web API offers functions that manage:
 
