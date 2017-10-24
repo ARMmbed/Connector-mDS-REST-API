@@ -23,7 +23,7 @@ If the Authorization header is not set, or if the access key is incorrect, reque
 
 Many functions in the mbed Device Connector API are asynchronous because it is not guaranteed
 that an action (such as writing to a device) will happen straight away, as the device might be in deep sleep
-or otherwise slow to respond. These functions are marked with '(async)' in the [API reference](/docs/restructure/legacy-products/api-reference.html):
+or otherwise slow to respond. These functions are marked with '(async)' in the [API reference](/docs/v1.2/legacy-products/api-reference.html):
 
 * Reading from a resource
 * Executing a function on a resource
@@ -37,7 +37,7 @@ Requests to these APIs return a JSON object containing `async-response-id` in th
 {"async-response-id":"1073741825#521f9d17-c5d7-4769-b89f-b608..."}
 ```
 
-The actual response related to the `async-response-id` can be received by either [registering a notification callback](#registering-a-notification-callback) or [long polling](#long-polling). These mechanisms are explained in the following two chapters. The notification callback and long polling are also used for receiving [notifications](/docs/restructure/legacy-products/api-reference.html#notifications) about certain events, such as device registration or a change in its resource state.
+The actual response related to the `async-response-id` can be received by either [registering a notification callback](#registering-a-notification-callback) or [long polling](#long-polling). These mechanisms are explained in the following two chapters. The notification callback and long polling are also used for receiving [notifications](/docs/v1.2/legacy-products/api-reference.html#notifications) about certain events, such as device registration or a change in its resource state.
 In these cases, the `async-response-id` is not involved.
 
 
@@ -91,7 +91,7 @@ Resources are categorized using the [Lightweight Machine to Machine (LWM2M) prot
 
 ![mbed Device Connector data model](https://s3-us-west-2.amazonaws.com/cloud-docs-images/data_model.png)
 
-Using the LWM2M specification it’s easy for services and machines to discover resources and have a standard way of controlling them. The specification is essentially a giant look-up table. The [full OMA LWM2M specification can be found here](http://technical.openmobilealliance.org/Technical/technical-information/omna/lightweight-m2m-lwm2m-object-registry).
+Using the LwM2M specification it’s easy for services and machines to discover resources and have a standard way of controlling them. The specification is essentially a giant look-up table. The [full OMA LWM2M specification can be found here](http://technical.openmobilealliance.org/Technical/technical-information/omna/lightweight-m2m-lwm2m-object-registry).
 
 #### Example
 
@@ -108,7 +108,7 @@ Resources are defined by the endpoint, which runs mbed Client. As a reference:
     * [M2MInterfaceFactory::create_object](/docs/v1.2/mbed-client/class_m2_m_interface_factory.html#a99472fdf5a073df3c5f1b3879f73b282) (ObjectId)
     * [M2MObjectInstance::create_dynamic_resource](/docs/v1.2/mbed-client/class_m2_m_object_instance.html#a17b4afaa4bd1933ea8b66b7c42e779b3) and [M2MObjectInstance::create_static_resource](/docs/v1.2/mbed-client/class_m2_m_object_instance.html#ab93b59f7c8538a07a76e57575e7284a6) (ResourceId)
 
-Read the full [mbed Client API documentation](/docs/v1.2/mbed-client/index.html) and the rest in the [mbed Client guide](/docs/restructure/legacy-products/index.html).
+Read the full [mbed Client API documentation](/docs/v1.2/mbed-client/index.html) and the rest in the [mbed Client guide](/docs/v1.2/legacy-products/index.html).
 
 ### Example applications
 
